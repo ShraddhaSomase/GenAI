@@ -9,13 +9,3 @@ MudraMitra is a simple Python project that I am developing to manage financial r
 - Stores records using JSON.
 - Uses basic Python concepts like functions, loops, and conditions.
 
-# Technologies
-- Python
-- JSON
-- GitHub
-
-# Developed By
-Shraddha Somase
-
-# Progress
-Day 1 – Python Introduction and Menu Program
