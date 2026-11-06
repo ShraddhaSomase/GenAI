@@ -1,37 +1,56 @@
 [
   {
     "id": 1,
-    "name": "Rahul",
-    "product": "Personal Loan",
-    "amount": 50000,
-    "status": "Approved"
+    "date": "2026-11-06",
+    "type": "expense",
+    "category": "Personal Loan",
+    "amount": 50000.0,
+    "mode": "Cash",
+    "note": "Rahul"
   },
   {
     "id": 2,
-    "name": "Priya",
-    "product": "Business Loan",
-    "amount": 100000,
-    "status": "Pending"
+    "date": "2026-11-06",
+    "type": "expense",
+    "category": "Business Loan",
+    "amount": 100000.0,
+    "mode": "Cash",
+    "note": "Priya"
   },
   {
     "id": 3,
-    "name": "Amit",
-    "product": "Home Loan",
-    "amount": 500000,
-    "status": "Approved"
+    "date": "2026-11-06",
+    "type": "expense",
+    "category": "Home Loan",
+    "amount": 500000.0,
+    "mode": "Cash",
+    "note": "Amit"
   },
   {
     "id": 4,
-    "name": "Sneha",
-    "product": "Education Loan",
-    "amount": 75000,
-    "status": "Rejected"
+    "date": "2026-11-06",
+    "type": "expense",
+    "category": "Education Loan",
+    "amount": 75000.0,
+    "mode": "Cash",
+    "note": "Sneha"
   },
   {
     "id": 5,
-    "name": "Karan",
-    "product": "Personal Loan",
-    "amount": 30000,
-    "status": "Pending"
+    "date": "2026-11-06",
+    "type": "expense",
+    "category": "Personal Loan",
+    "amount": 30000.0,
+    "mode": "Cash",
+    "note": "Karan"
+  },
+  {
+    "id": 6,
+    "date": "2026-11-06",
+    "type": "income",
+    "category": "Salary",
+    "amount": 3000.0,
+    "mode": "Upi",
+    "note": "Monthly salary"
   }
 ]
