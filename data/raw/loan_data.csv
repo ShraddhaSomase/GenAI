@@ -1,0 +1,101 @@
+application_id,application_date,age,annual_income,employment_years,home_ownership,purpose,loan_amount,term_months,credit_score,dti_pct,decision,interest_rate,monthly_payment,loan_status
+LN-000001,2024-01-02,41,88000,1,Rent,Credit card payoff,2500,36,683,26.9,Approved,12.04,83.08,Current
+LN-000002,2024-01-05,64,85500,11,Own,Credit card payoff,5000,36,613,27.0,Approved,20.16,186.23,Current
+LN-000003,2024-01-08,33,84500,4,Mortgage,Small business,11500,36,704,34.4,Approved,13.47,390.09,Fully paid
+LN-000004,2024-01-11,56,121000,2,Mortgage,Debt consolidation,8500,36,686,33.2,Approved,12.28,283.46,Current
+LN-000005,2024-01-15,60,139000,0,Mortgage,Credit card payoff,2500,60,695,25.5,Approved,12.89,56.74,Current
+LN-000006,2024-01-18,58,59000,1,Mortgage,Credit card payoff,17000,36,701,15.7,Approved,11.89,563.75,Current
+LN-000007,2024-01-21,36,36500,6,Mortgage,Wedding,9000,36,636,32.5,Denied,,,
+LN-000008,2024-01-24,64,57500,2,Mortgage,Medical,5000,36,693,20.8,Approved,12.29,166.76,Current
+LN-000009,2024-01-27,46,57000,3,Rent,Credit card payoff,19500,36,681,21.9,Approved,11.72,645.07,Current
+LN-000010,2024-01-30,54,39500,6,Mortgage,Debt consolidation,8500,36,667,30.0,Denied,,,
+LN-000011,2024-02-03,46,96000,1,Mortgage,Debt consolidation,11000,60,589,31.3,Denied,,,
+LN-000012,2024-02-07,54,60000,6,Own,Debt consolidation,5500,36,784,39.7,Approved,8.47,173.55,Current
+LN-000013,2024-02-10,42,50000,2,Mortgage,Debt consolidation,7500,36,652,41.3,Denied,,,
+LN-000014,2024-02-14,40,93000,3,Mortgage,Debt consolidation,4000,60,614,32.9,Denied,,,
+LN-000015,2024-02-18,68,125000,7,Own,Debt consolidation,10000,36,706,18.5,Approved,11.95,331.90,Current
+LN-000016,2024-02-21,26,64000,1,Rent,Debt consolidation,22500,60,665,34.9,Denied,,,
+LN-000017,2024-02-25,47,96000,3,Rent,Debt consolidation,20000,36,735,25.2,Denied,,,
+LN-000018,2024-02-28,43,25500,1,Own,Credit card payoff,4000,36,714,17.7,Approved,11.59,132.08,Charged off
+LN-000019,2024-03-04,60,82000,12,Mortgage,Debt consolidation,14000,36,722,19.2,Approved,9.46,448.20,Current
+LN-000020,2024-03-07,39,93000,7,Rent,Debt consolidation,3000,36,581,25.2,Denied,,,
+LN-000021,2024-03-11,31,96000,5,Mortgage,Credit card payoff,2500,36,706,17.7,Denied,,,
+LN-000022,2024-03-14,42,52500,5,Mortgage,Credit card payoff,7500,36,674,11.8,Approved,14.40,257.79,Current
+LN-000023,2024-03-18,55,74500,18,Mortgage,Credit card payoff,12500,36,791,22.4,Approved,7.61,389.46,Current
+LN-000024,2024-03-21,50,88500,12,Mortgage,Debt consolidation,3500,60,760,15.7,Approved,8.46,71.74,Current
+LN-000025,2024-03-25,47,124000,15,Mortgage,Credit card payoff,8500,36,592,41.3,Denied,,,
+LN-000026,2024-03-29,30,28500,2,Mortgage,Credit card payoff,5500,60,598,15.1,Denied,,,
+LN-000027,2024-04-02,45,39000,2,Mortgage,Debt consolidation,29000,36,668,25.0,Denied,,,
+LN-000028,2024-04-05,40,75000,1,Mortgage,Car,11500,36,672,33.5,Approved,15.68,402.49,Current
+LN-000029,2024-04-09,44,53500,0,Mortgage,Home improvement,5500,36,684,26.4,Approved,12.08,182.89,Current
+LN-000030,2024-04-12,62,98000,2,Mortgage,Debt consolidation,6000,36,816,44.5,Approved,8.32,188.91,Current
+LN-000031,2024-04-16,37,74000,12,Rent,Debt consolidation,8000,36,817,12.5,Approved,6.67,245.81,Current
+LN-000032,2024-04-19,25,44500,0,Rent,Credit card payoff,15500,60,765,35.5,Approved,9.50,325.53,Current
+LN-000033,2024-04-24,60,33000,2,Mortgage,Home improvement,12000,36,741,24.5,Denied,,,
+LN-000034,2024-04-27,50,84000,5,Rent,Debt consolidation,8000,60,685,40.2,Denied,,,
+LN-000035,2024-05-01,42,117000,4,Rent,Debt consolidation,10000,36,778,29.4,Approved,7.56,311.34,Current
+LN-000036,2024-05-04,41,138000,4,Mortgage,Medical,7500,36,739,26.1,Approved,9.88,241.58,Current
+LN-000037,2024-05-08,48,64500,1,Mortgage,Debt consolidation,22000,60,696,38.7,Denied,,,
+LN-000038,2024-05-12,34,73500,5,Rent,Credit card payoff,2500,36,673,21.4,Denied,,,
+LN-000039,2024-05-15,54,82000,13,Rent,Credit card payoff,3000,36,762,27.3,Approved,7.28,93.02,Fully paid
+LN-000040,2024-05-20,61,83000,1,Mortgage,Debt consolidation,8500,36,724,40.1,Approved,9.64,272.84,Current
+LN-000041,2024-05-23,33,58000,0,Mortgage,Credit card payoff,11000,36,643,18.2,Approved,14.93,380.94,Current
+LN-000042,2024-05-27,46,80000,16,Mortgage,Debt consolidation,4000,36,625,15.9,Denied,,,
+LN-000043,2024-05-30,46,105000,5,Rent,Home improvement,25000,36,731,38.7,Approved,9.83,804.69,Current
+LN-000044,2024-06-03,54,88000,2,Mortgage,Debt consolidation,3500,36,687,35.6,Approved,12.83,117.64,Fully paid
+LN-000045,2024-06-06,55,124500,0,Own,Wedding,11000,36,723,35.7,Approved,10.19,355.92,Current
+LN-000046,2024-06-10,50,64500,1,Mortgage,Debt consolidation,24000,60,706,40.7,Approved,13.75,555.33,Current
+LN-000047,2024-06-14,32,107500,0,Rent,Small business,16500,36,709,27.9,Approved,12.81,554.44,Current
+LN-000048,2024-06-18,49,124500,5,Own,Debt consolidation,7500,60,718,35.3,Approved,13.68,173.27,Current
+LN-000049,2024-06-21,49,114000,6,Rent,Debt consolidation,23500,60,735,32.8,Approved,10.92,510.01,Fully paid
+LN-000050,2024-06-25,59,81500,13,Mortgage,Home improvement,6000,36,688,22.3,Approved,12.06,199.46,Fully paid
+LN-000051,2024-06-28,52,67000,2,Rent,Car,9500,60,597,21.4,Denied,,,
+LN-000052,2024-07-02,28,83000,0,Mortgage,Credit card payoff,14500,60,775,28.1,Approved,8.85,299.94,Current
+LN-000053,2024-07-05,33,46500,2,Own,Debt consolidation,5500,36,582,8.6,Denied,,,
+LN-000054,2024-07-09,64,100000,21,Rent,Wedding,5000,36,826,33.7,Approved,7.74,156.08,Current
+LN-000055,2024-07-13,62,80000,5,Mortgage,Debt consolidation,13000,60,703,17.7,Approved,12.37,291.61,Fully paid
+LN-000056,2024-07-17,50,58000,0,Own,Credit card payoff,10000,36,555,18.3,Denied,,,
+LN-000057,2024-07-20,39,99000,9,Mortgage,Debt consolidation,3000,60,692,24.7,Approved,12.94,68.17,Current
+LN-000058,2024-07-24,44,68000,12,Mortgage,Wedding,7500,36,756,31.4,Approved,9.31,239.58,Current
+LN-000059,2024-07-28,49,129000,4,Mortgage,Credit card payoff,2000,60,593,27.5,Denied,,,
+LN-000060,2024-07-31,32,107000,9,Rent,Credit card payoff,5000,60,728,15.1,Approved,10.09,106.46,Current
+LN-000061,2024-08-04,39,42000,6,Rent,Home improvement,22500,60,669,19.3,Denied,,,
+LN-000062,2024-08-08,59,63500,5,Own,Debt consolidation,16500,36,664,5.9,Approved,14.97,571.74,Current
+LN-000063,2024-08-12,47,48500,4,Rent,Debt consolidation,25000,60,790,26.0,Approved,8.31,510.63,Current
+LN-000064,2024-08-15,54,94500,12,Mortgage,Credit card payoff,4500,36,592,29.4,Denied,,,
+LN-000065,2024-08-19,26,68500,0,Rent,Car,17000,36,605,34.2,Denied,,,
+LN-000066,2024-08-22,39,71000,3,Rent,Debt consolidation,18500,60,686,27.6,Denied,,,
+LN-000067,2024-08-26,38,78500,7,Mortgage,Credit card payoff,11500,36,731,30.1,Approved,9.66,369.24,Current
+LN-000068,2024-08-29,48,78000,2,Rent,Medical,10500,60,713,35.5,Denied,,,
+LN-000069,2024-09-03,46,50000,2,Rent,Credit card payoff,3500,36,594,29.1,Denied,,,
+LN-000070,2024-09-06,57,44000,0,Rent,Medical,6500,36,759,32.8,Approved,9.89,209.40,Current
+LN-000071,2024-09-10,42,63000,9,Mortgage,Debt consolidation,6000,36,767,19.4,Approved,7.69,187.16,Current
+LN-000072,2024-09-13,61,107500,12,Mortgage,Debt consolidation,3000,36,645,17.8,Approved,15.11,104.16,Current
+LN-000073,2024-09-17,47,64500,16,Own,Debt consolidation,5500,36,716,30.3,Approved,12.62,184.31,Fully paid
+LN-000074,2024-09-20,40,78500,6,Rent,Medical,4000,36,795,27.7,Approved,7.51,124.44,Current
+LN-000075,2024-09-24,64,123500,0,Own,Wedding,4500,36,757,22.9,Approved,8.93,142.95,Current
+LN-000076,2024-09-28,54,88000,1,Mortgage,Credit card payoff,18500,36,622,16.6,Denied,,,
+LN-000077,2024-10-02,42,88500,3,Mortgage,Home improvement,5500,36,694,21.0,Approved,11.89,182.39,Charged off
+LN-000078,2024-10-05,54,51500,13,Own,Credit card payoff,8500,36,770,30.8,Approved,7.42,264.09,Current
+LN-000079,2024-10-09,38,97500,19,Mortgage,Home improvement,6000,60,784,27.8,Approved,8.90,124.26,Fully paid
+LN-000080,2024-10-13,41,139500,13,Rent,Credit card payoff,2500,60,825,29.7,Approved,9.28,52.24,Fully paid
+LN-000081,2024-10-16,44,81500,10,Rent,Debt consolidation,14500,36,723,12.7,Approved,9.00,461.10,Fully paid
+LN-000082,2024-10-20,56,38500,2,Own,Credit card payoff,22000,60,644,17.0,Denied,,,
+LN-000083,2024-10-24,50,36000,9,Rent,Home improvement,11500,36,805,32.2,Approved,7.39,357.14,Current
+LN-000084,2024-10-28,58,117000,2,Own,Home improvement,14000,36,791,27.2,Approved,7.85,437.74,Fully paid
+LN-000085,2024-10-31,30,42500,2,Mortgage,Wedding,5500,36,653,38.1,Approved,16.10,193.64,Fully paid
+LN-000086,2024-11-04,44,41500,7,Mortgage,Debt consolidation,13500,60,680,35.4,Denied,,,
+LN-000087,2024-11-07,38,67500,3,Mortgage,Medical,2000,36,719,28.0,Approved,11.89,66.32,Fully paid
+LN-000088,2024-11-11,54,177500,26,Own,Credit card payoff,12000,36,811,34.5,Approved,8.43,378.42,Current
+LN-000089,2024-11-14,46,71500,2,Rent,Debt consolidation,9000,60,747,35.1,Approved,10.94,195.41,Current
+LN-000090,2024-11-19,57,25500,1,Own,Debt consolidation,5500,36,797,28.5,Approved,7.70,171.59,Fully paid
+LN-000091,2024-11-22,46,111500,0,Mortgage,Small business,5500,36,724,35.8,Approved,10.58,178.97,Current
+LN-000092,2024-11-26,23,54500,1,Mortgage,Small business,11500,36,676,25.4,Approved,16.23,405.61,Fully paid
+LN-000093,2024-11-29,54,88500,2,Mortgage,Debt consolidation,4500,36,711,13.6,Approved,11.98,149.42,Current
+LN-000094,2024-12-03,44,43000,1,Mortgage,Small business,6000,36,663,24.6,Approved,16.02,211.00,Current
+LN-000095,2024-12-08,47,37500,1,Mortgage,Medical,3000,36,670,46.3,Denied,,,
+LN-000096,2024-12-12,43,50500,5,Rent,Debt consolidation,26500,60,692,28.3,Approved,12.92,601.87,Current
+LN-000097,2024-12-17,35,43000,4,Mortgage,Credit card payoff,6500,36,671,21.4,Approved,15.00,225.32,Late
+LN-000098,2024-12-20,51,80500,2,Own,Credit card payoff,3000,36,673,40.7,Approved,16.33,105.96,Current
+LN-000099,2024-12-25,59,50000,0,Mortgage,Home improvement,19500,36,614,31.5,Denied,,,
+LN-000100,2024-12-30,49,126500,3,Mortgage,Debt consolidation,3500,36,683,32.7,Denied,,,
