@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "question": "string"
+    },
+    {
+        "id": 2,
+        "question": "string"
+    },
+    {
+        "id": 3,
+        "question": "Find high income loan applicants"
+    },
+    {
+        "id": 4,
+        "question": "Find high income loan applicants"
+    },
+    {
+        "id": 5,
+        "question": "Find high income loan applicants"
+    }
+]
