@@ -1,46 +1,47 @@
+"""MudraMitra - smart search with TF-IDF + cosine similarity.
+
+Ranks records against a question and returns the top matches.
+"""
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def smart_search(question, records):
+def record_to_text(r):
+    """Turn one record into a searchable sentence."""
+    return f"{r['category']} {r['type']} {r['mode']} {r['note']} {r['date']}"
 
-    if not records:
+
+def smart_search(records, question, top_k=3):
+    """Return the top_k records most similar to the question, best first.
+
+    Each result is the record plus a 'score' between 0 and 1.
+    Records with a score of 0 (no word in common) are left out.
+    """
+    question = question.strip()
+    if not records or not question:
         return []
 
-    documents = []
-
-    for record in records:
-        text = " ".join(
-            f"{key} {value}"
-            for key, value in record.items()
-        )
-        documents.append(text)
-
-    all_text = documents + [question]
-
+    docs = [record_to_text(r) for r in records]
     vectorizer = TfidfVectorizer(stop_words="english")
+    try:
+        doc_matrix = vectorizer.fit_transform(docs)
+    except ValueError:  # empty vocabulary
+        return []
+    q_vec = vectorizer.transform([question])
 
-    matrix = vectorizer.fit_transform(all_text)
-
-    question_vector = matrix[-1]
-    record_vectors = matrix[:-1]
-
-    scores = cosine_similarity(
-        question_vector,
-        record_vectors
-    ).flatten()
-
-    top_indices = scores.argsort()[::-1][:3]
+    scores = cosine_similarity(q_vec, doc_matrix).flatten()
+    ranked = sorted(range(len(records)), key=lambda i: scores[i], reverse=True)
 
     results = []
-
-    for index in top_indices:
-        results.append({
-            "record": records[index],
-            "similarity_score": round(
-                float(scores[index]), 4
-            )
-        })
-
+    for i in ranked[:top_k]:
+        if scores[i] > 0:
+            results.append({**records[i], "score": round(float(scores[i]), 4)})
     return results
+
+
+if __name__ == "__main__":
+    from app.records import load_records
+
+    for hit in smart_search(load_records(), "how much did I spend on rent"):
+        print(hit["score"], hit["category"], hit["amount"], hit["note"])

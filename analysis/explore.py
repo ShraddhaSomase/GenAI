@@ -1,22 +1,30 @@
+"""MudraMitra - explore the data with pandas.
 
-import json
-import pandas as pd
+Run from the project root:
+    python analysis/explore.py
+"""
+
+import sys
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+import pandas as pd
 
-file_path = BASE_DIR / "data" / "records.json"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+path = DATA_DIR / "records.json"
+if not path.exists():
+    path = DATA_DIR / "sample_records.json"
 
-with open(file_path, "r") as file:
-    records = json.load(file)
+df = pd.read_json(path)
+print(f"Loaded {len(df)} records from {path.name}\n")
 
-df = pd.DataFrame(records)
+income = df[df["type"] == "income"]["amount"].sum()
+expense = df[df["type"] == "expense"]["amount"].sum()
+top_cat = df[df["type"] == "expense"].groupby("category")["amount"].sum().idxmax()
+top_amt = df[df["type"] == "expense"].groupby("category")["amount"].sum().max()
+top_mode = df["mode"].value_counts().idxmax()
+top_mode_n = df["mode"].value_counts().max()
 
-print("TOTAL LOAN RECORDS:")
-print(len(df))
-
-print("\nAVERAGE ANNUAL INCOME:")
-print(df["annual_income"].mean())
-
-print("\nLOAN DECISION DISTRIBUTION:")
-print(df["decision"].value_counts())
+print(f"Fact 1: Total income is Rs {:.2f} and total expense is Rs {:.2f} (balance Rs {:.2f}).".format(
+    income, expense, income - expense))
+print(f"Fact 2: The biggest expense category is {top_cat} at Rs {top_amt:.2f}.")
+print(f"Fact 3: The most used payment mode is {top_mode} ({top_mode_n} of {len(df)} records).")
