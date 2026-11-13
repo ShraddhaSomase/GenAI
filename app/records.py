@@ -2,41 +2,75 @@
 import json
 from pathlib import Path
 
-DATA_FILE = (
-    Path(__file__).resolve().parent.parent
-    / "data" / "sample_records.json"
-)
+DATA_FILE = Path("data/records.json")
+
 
 def load_records():
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        return json.load(file)
+    """Load loan records from JSON file."""
+    if not DATA_FILE.exists():
+        return []
+
+    try:
+        with DATA_FILE.open("r", encoding="utf-8") as file:
+            records = json.load(file)
+
+        if not isinstance(records, list):
+            print("Error: JSON data must contain a list.")
+            return []
+
+        return records
+
+    except (json.JSONDecodeError, OSError) as error:
+        print("Error loading records:", error)
+        return []
 
 
-def search(records, keyword):
-    keyword = keyword.lower()
+def save_records(records):
+    """Save records into JSON file."""
+    try:
+        DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+        with DATA_FILE.open("w", encoding="utf-8") as file:
+            json.dump(records, file, indent=4)
+
+        print("Records saved successfully!")
+
+    except OSError as error:
+        print("Error saving records:", error)
+
+
+def add_record(record):
+    """Add a new record."""
+    records = load_records()
+    records.append(record)
+    save_records(records)
+
+
+def get_all_records():
+    """Return all records."""
+    return load_records()
+
+
+def search_records(keyword):
+    """Search records using a keyword."""
+    records = load_records()
 
     return [
         record for record in records
-        if any(
-            keyword in str(value).lower()
-            for value in record.values()
-        )
+        if keyword.lower() in str(record).lower()
     ]
 
 
-def count_by(records, field):
-    counts = {}
-
-    for record in records:
-        category = record.get(field, "Unknown")
-        counts[category] = counts.get(category, 0) + 1
-
-    return counts
+def get_record_count():
+    """Return total number of records."""
+    return len(load_records())
 
 
-def get_by_id(records, id):
-    for record in records:
-        if record.get("application_id") == id:
-            return record
+if __name__ == "__main__":
+    records = load_records()
 
-    return None
+    print("Total loan records:", len(records))
+    print("\nFirst 5 records:")
+
+    for record in records[:5]:
+        print(record)
