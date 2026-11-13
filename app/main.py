@@ -1,112 +1,80 @@
+"""MudraMitra - FastAPI service (day-04).
+
+Run from the project root:
+    uvicorn app.main:app --reload
+Docs: http://127.0.0.1:8000/docs
+"""
+
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
-from pathlib import Path
-import json
 
-from app.records import load_records
+from app import records as rec
+from app.smart_search import smart_search
 
-app = FastAPI(
-    title="GenAI Loan Record API",
-    description="API for managing loan records and user questions",
-    version="1.0.0"
-)
+app = FastAPI(title="MudraMitra API")
 
-# Questions file path
 QUESTIONS_FILE = Path(__file__).resolve().parent.parent / "data" / "questions.json"
 
 
-# Request model
-class Question(BaseModel):
+class QuestionRequest(BaseModel):
     question: str
 
 
-# 1. Health Check
+# 1. Health check
 @app.get("/health")
-def health_check():
-    return {
-        "status": "healthy",
-        "message": "API is running successfully"
-    }
+def health():
+    return {"status": "ok"}
 
 
-# 2. Get All Records with Optional Limit
+# 2. List records, optional ?limit=
 @app.get("/records")
-def get_records(limit: int | None = Query(default=None, ge=1)):
-    records = load_records()
-
-    if limit is not None:
-        records = records[:limit]
-
-    return {
-        "total": len(records),
-        "records": records
-    }
+def list_records(limit: Optional[int] = Query(None, ge=1)):
+    records = rec.load_records()
+    return records[:limit] if limit else records
 
 
-# 3. Get Record by ID
-@app.get(f"/records/{id}")
-def get_record(id: str):
-    records = load_records()
-
-    for record in records:
-        if str(record.get("id")) == id:
-            return record
-
-    raise HTTPException(
-        status_code=404,
-        detail="Record not found"
-    )
+# 3. One record by id (404 if missing)
+@app.get("/records/{id}")
+def get_record(id: int):
+    for r in rec.load_records():
+        if r["id"] == id:
+            return r
+    raise HTTPException(status_code=404, detail=f"Record {id} not found")
 
 
-# 4. Search Records
+# 4. Smart search: TF-IDF + cosine similarity, top 3
 @app.get("/search")
 def search_records(q: str = Query(..., min_length=1)):
-    records = load_records()
-    keyword = q.lower()
-
-    results = [
-        record for record in records
-        if keyword in json.dumps(record).lower()
-    ]
-
-    return {
-        "keyword": q,
-        "total": len(results),
-        "results": results
-    }
+    results = smart_search(rec.load_records(), q, top_k=3)
+    return {"query": q, "total_results": len(results), "results": results}
 
 
-# 5. Save User Question
-@app.post("/questions")
-def save_question(data: Question):
-    question = data.question.strip()
-
+# 5. Save a user question to data/questions.json
+@app.post("/questions", status_code=201)
+def submit_question(request: QuestionRequest):
+    question = request.question.strip()
     if not question:
-        raise HTTPException(
-            status_code=400,
-            detail="Question cannot be empty"
-        )
+        raise HTTPException(status_code=400, detail="Question cannot be empty")
 
-    QUESTIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
-
-    if QUESTIONS_FILE.exists():
-        with open(QUESTIONS_FILE, "r", encoding="utf-8") as file:
-            questions = json.load(file)
-    else:
+    try:
+        with open(QUESTIONS_FILE, "r", encoding="utf-8") as f:
+            questions = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
         questions = []
 
-    new_question = {
+    entry = {
         "id": len(questions) + 1,
-        "question": question
+        "question": question,
+        "asked_at": datetime.now().isoformat(timespec="seconds"),
     }
+    questions.append(entry)
 
-    questions.append(new_question)
-
-    with open(QUESTIONS_FILE, "w", encoding="utf-8") as file:
-        json.dump(questions, file, indent=4)
-
-    return {
-        "message": "Question saved successfully",
-        "data": new_question
-    }
+    QUESTIONS_FILE.parent.mkdir(exist_ok=True)
+    with open(QUESTIONS_FILE, "w", encoding="utf-8") as f:
+        json.dump(questions, f, indent=2, ensure_ascii=False)
+    return entry
