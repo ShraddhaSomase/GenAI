@@ -1,4 +1,4 @@
-
+﻿
 """MudraMitra - FastAPI service (day-04).
 
 Run from the project root:
@@ -121,3 +121,49 @@ def submit_question(request: QuestionRequest):
         )
 
     return entry
+
+# Day 06 - LLM Chat Integration
+from pydantic import Field
+from app.llm import get_llm_response
+
+
+# Chat request model
+class ChatRequest(BaseModel):
+    question: str = Field(
+        min_length=1,
+        max_length=2000
+    )
+
+
+# 6. AI Chat endpoint
+@app.post("/chat")
+def chat(request: ChatRequest):
+
+    question = request.question.strip()
+
+    if not question:
+        raise HTTPException(
+            status_code=400,
+            detail="Question cannot be empty"
+        )
+
+    try:
+        answer = get_llm_response(question)
+
+        return {
+            "question": question,
+            "answer": answer
+        }
+
+    except RuntimeError as e:
+        raise HTTPException(
+            status_code=503,
+            detail=str(e)
+        )
+
+    except Exception:
+        raise HTTPException(
+            status_code=502,
+            detail="LLM provider request failed"
+        )
+
