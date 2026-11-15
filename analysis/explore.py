@@ -1,32 +1,34 @@
-"""MudraMitra - explore the data with pandas.
+﻿"""Explore MudraMitra scheme records using pandas.
 
 Run from the project root:
     python analysis/explore.py
 """
 
 from pathlib import Path
-
 import pandas as pd
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-path = DATA_DIR / "records.json"
-if not path.exists():
-    path = DATA_DIR / "sample_records.json"
+DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "records.json"
 
-df = pd.read_json(path)
-print(f"Loaded {len(df)} records and {len(df.columns)} columns from {path.name}\n")
+df = pd.read_json(DATA_FILE)
 
-# Fact 1: how many loans were not fully paid
-unpaid_pct = df["not_fully_paid"].mean() * 100
-print(f"Fact 1: {unpaid_pct:.1f}% of loans were not fully paid "
-      f"({int(df['not_fully_paid'].sum())} of {len(df)}).")
+print(f"Loaded {len(df)} scheme records from {DATA_FILE.name}")
+print(f"Columns: {list(df.columns)}")
 
-# Fact 2: most common loan purpose
-top_purpose = df["purpose"].value_counts().idxmax()
-top_n = df["purpose"].value_counts().max()
-print(f"Fact 2: The most common loan purpose is '{top_purpose}' ({top_n} loans).")
+print("\n--- Records by loan category ---")
+category_counts = df["loan_category"].value_counts()
 
-# Fact 3: average FICO score for fully paid vs not fully paid loans
-fico = df.groupby("not_fully_paid")["fico"].mean()
-print(f"Fact 3: Average FICO score is {fico[0]:.0f} for fully paid loans "
-      f"and {fico[1]:.0f} for not fully paid loans.")
+print(category_counts.to_string())
+
+print("\n--- Loan amount ranges ---")
+for category, group in df.groupby("loan_category"):
+    print(f"\n{category}:")
+    for amount in group["amount_range"].dropna().unique():
+        print(f"  {amount}")
+
+print("\n--- Eligibility information ---")
+for category, group in df.groupby("loan_category"):
+    print(f"\n{category}:")
+    for applicant in group["who_can_apply"].dropna().unique():
+        print(f"  - {applicant}")
+
+print("\nMUDRAMITRA data exploration completed.")
