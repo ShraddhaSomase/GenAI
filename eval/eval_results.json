@@ -1,0 +1,641 @@
+{
+    "configurations": [
+        {
+            "top_k": 3,
+            "total_questions": 15,
+            "answerability_accuracy": 93.33,
+            "citation_coverage": 91.67,
+            "source_accuracy": 91.67,
+            "keyword_accuracy": 40.25,
+            "overall_score": 82.05,
+            "details": [
+                {
+                    "id": 1,
+                    "question": "What is the maximum loan amount under Shishu category?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.5,
+                    "answer": "The maximum loan amount under the Shishu category is Rs. 50,000.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "question": "What is the loan amount range under Kishor category?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.33,
+                    "answer": "The Kishor category covers loans above Rs. 50,000 and up to Rs. 5,00,000.",
+                    "citations": [
+                        {
+                            "citation": 2,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "question": "What is the loan amount range under Tarun category?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.33,
+                    "answer": "Under the Tarun category, the loan amount ranges from above Rs.5.00 lakh up to Rs.10.00 lakh.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        },
+                        {
+                            "citation": 2,
+                            "source": "pmmy_faq.pdf",
+                            "page": 19,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_19_chunk_4"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "question": "What is the maximum loan amount under Tarun Plus?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.5,
+                    "answer": "The maximum loan amount under Tarun Plus is Rs. 20.00 lakh.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "question": "What is the objective of the Pradhan Mantri Mudra Yojana?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.0,
+                    "answer": "The objective of the Pradhan Mantri Mudra Yojana is to extend collateral‑free institutional credit to entrepreneurs.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_3"
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "question": "Which activities are supported under MUDRA loans?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.0,
+                    "answer": "MUDRA loans support non‑farm income‑generating activities, i.e., income‑generating activities for micro and small business units.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 19,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_19_chunk_2"
+                        },
+                        {
+                            "citation": 2,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_4"
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "question": "Are activities allied to agriculture eligible under MUDRA?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "Yes, activities allied to agriculture such as poultry, dairy, beekeeping, etc. are eligible for MUDRA loans.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 5,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_5_chunk_1"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "question": "Are homestay businesses covered under MUDRA?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.5,
+                    "answer": "Yes, homestay businesses are covered under MUDRA. The government announced MUDRA loans specifically for homestays in the Union Budget 2025-26, and the guide discusses financing options for homestays.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_1"
+                        },
+                        {
+                            "citation": 2,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_3"
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "question": "What is the maximum loan amount under the Stand-Up India scheme?",
+                    "expected_answerable": true,
+                    "actual_answerable": false,
+                    "answerability_correct": false,
+                    "citation_present": false,
+                    "expected_source_found": false,
+                    "keyword_score": 0.0,
+                    "answer": "The requested information is not available in my documents.",
+                    "citations": []
+                },
+                {
+                    "id": 10,
+                    "question": "What is the minimum loan amount under the Stand-Up India scheme?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.0,
+                    "answer": "The minimum loan amount under the Stand‑Up India scheme is ₹10 lakh.",
+                    "citations": [
+                        {
+                            "citation": 2,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_1"
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "question": "Who can apply under the Stand-Up India scheme?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.67,
+                    "answer": "The scheme is for borrowers who are either Scheduled Caste (SC) or Scheduled Tribe (ST) individuals, and it also requires at least one woman borrower per bank branch.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_1"
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "question": "What type of enterprise is supported under Stand-Up India?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The Stand‑Up India scheme supports the setting up of a greenfield enterprise.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_1"
+                        },
+                        {
+                            "citation": 2,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_3"
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "question": "What is the exact current SBI interest rate for a Rs. 3 lakh Mudra loan?",
+                    "expected_answerable": false,
+                    "actual_answerable": false,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The requested information is not available in my documents.",
+                    "citations": []
+                },
+                {
+                    "id": 14,
+                    "question": "What is my personal MUDRA loan application status?",
+                    "expected_answerable": false,
+                    "actual_answerable": false,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The requested information is not available in my documents.",
+                    "citations": []
+                },
+                {
+                    "id": 15,
+                    "question": "What is the exact bank branch address where I should submit my loan application?",
+                    "expected_answerable": false,
+                    "actual_answerable": false,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The requested information is not available in my documents.",
+                    "citations": []
+                }
+            ]
+        },
+        {
+            "top_k": 5,
+            "total_questions": 15,
+            "answerability_accuracy": 100.0,
+            "citation_coverage": 100.0,
+            "source_accuracy": 100.0,
+            "keyword_accuracy": 63.83,
+            "overall_score": 92.77,
+            "details": [
+                {
+                    "id": 1,
+                    "question": "What is the maximum loan amount under Shishu category?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.5,
+                    "answer": "The maximum loan amount under the Shishu category is Rs. 50,000.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        },
+                        {
+                            "citation": 4,
+                            "source": "pmmy_faq.pdf",
+                            "page": 19,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_19_chunk_3"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "question": "What is the loan amount range under Kishor category?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.33,
+                    "answer": "The Kishor category covers loans above Rs. 50,000 and up to Rs. 5 lakh.",
+                    "citations": [
+                        {
+                            "citation": 2,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        },
+                        {
+                            "citation": 3,
+                            "source": "pmmy_faq.pdf",
+                            "page": 19,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_19_chunk_3"
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "question": "What is the loan amount range under Tarun category?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.33,
+                    "answer": "Under the Tarun category, the loan amount ranges from above Rs.5.00 lakh up to Rs.10.00 lakh.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        },
+                        {
+                            "citation": 2,
+                            "source": "pmmy_faq.pdf",
+                            "page": 19,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_19_chunk_4"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "question": "What is the maximum loan amount under Tarun Plus?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The maximum loan amount under Tarun Plus is Rs. 20 lakh.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_5"
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "question": "What is the objective of the Pradhan Mantri Mudra Yojana?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.0,
+                    "answer": "The objective of the Pradhan Mantri Mudra Yojana is to extend collateral‑free institutional credit to entrepreneurs.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_3"
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "question": "Which activities are supported under MUDRA loans?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.0,
+                    "answer": "MUDRA loans support non‑farm income‑generating activities of micro and small businesses.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 19,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_19_chunk_2"
+                        },
+                        {
+                            "citation": 3,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_4"
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "question": "Are activities allied to agriculture eligible under MUDRA?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "Yes, activities allied to agriculture such as poultry, dairy, beekeeping, etc. are eligible for MUDRA loans.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 5,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_5_chunk_1"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "question": "Are homestay businesses covered under MUDRA?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 0.5,
+                    "answer": "Yes, homestay businesses are covered under MUDRA. The government announced MUDRA loans specifically for homestays in the Union Budget 2025-26.",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_1"
+                        },
+                        {
+                            "citation": 3,
+                            "source": "pmmy_faq.pdf",
+                            "page": 4,
+                            "title": "Guide to MUDRA Loans for Homestays - September 2025",
+                            "chunk_id": "pmmy_faq_page_4_chunk_3"
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "question": "What is the maximum loan amount under the Stand-Up India scheme?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The maximum loan amount under the Stand‑Up India scheme is 1 crore rupees.",
+                    "citations": [
+                        {
+                            "citation": 4,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_1"
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "question": "What is the minimum loan amount under the Stand-Up India scheme?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The minimum loan amount under the Stand‑Up India scheme is 10 lakh rupees.",
+                    "citations": [
+                        {
+                            "citation": 2,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_1"
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "question": "Who can apply under the Stand-Up India scheme?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "SC/ST and/or women entrepreneurs who are above 18 years of age can apply under the Stand‑Up India scheme.",
+                    "citations": [
+                        {
+                            "citation": 4,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_4"
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "question": "What type of enterprise is supported under Stand-Up India?",
+                    "expected_answerable": true,
+                    "actual_answerable": true,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The scheme supports greenfield enterprises, meaning first‑time ventures in the manufacturing, services or trading sectors (including activities allied to agriculture).",
+                    "citations": [
+                        {
+                            "citation": 1,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_1"
+                        },
+                        {
+                            "citation": 4,
+                            "source": "standup_faq.pdf",
+                            "page": 1,
+                            "title": "Frequently Asked Questions - Stand Up India Scheme",
+                            "chunk_id": "standup_faq_page_1_chunk_4"
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "question": "What is the exact current SBI interest rate for a Rs. 3 lakh Mudra loan?",
+                    "expected_answerable": false,
+                    "actual_answerable": false,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The requested information is not available in my documents.",
+                    "citations": []
+                },
+                {
+                    "id": 14,
+                    "question": "What is my personal MUDRA loan application status?",
+                    "expected_answerable": false,
+                    "actual_answerable": false,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The requested information is not available in my documents.",
+                    "citations": []
+                },
+                {
+                    "id": 15,
+                    "question": "What is the exact bank branch address where I should submit my loan application?",
+                    "expected_answerable": false,
+                    "actual_answerable": false,
+                    "answerability_correct": true,
+                    "citation_present": true,
+                    "expected_source_found": true,
+                    "keyword_score": 1.0,
+                    "answer": "The requested information is not available in my documents.",
+                    "citations": []
+                }
+            ]
+        }
+    ],
+    "best_configuration": 5
+}

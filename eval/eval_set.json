@@ -1,0 +1,107 @@
+﻿[
+  {
+    "id": 1,
+    "question": "What is the maximum loan amount under Shishu category?",
+    "answerable": true,
+    "expected_keywords": ["50000", "Shishu"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 2,
+    "question": "What is the loan amount range under Kishor category?",
+    "answerable": true,
+    "expected_keywords": ["50000", "5 lakh", "Kishor"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 3,
+    "question": "What is the loan amount range under Tarun category?",
+    "answerable": true,
+    "expected_keywords": ["5 lakh", "10 lakh", "Tarun"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 4,
+    "question": "What is the maximum loan amount under Tarun Plus?",
+    "answerable": true,
+    "expected_keywords": ["20 lakh", "Tarun Plus"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 5,
+    "question": "What is the objective of the Pradhan Mantri Mudra Yojana?",
+    "answerable": true,
+    "expected_keywords": ["micro", "small", "business"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 6,
+    "question": "Which activities are supported under MUDRA loans?",
+    "answerable": true,
+    "expected_keywords": ["manufacturing", "trading", "services"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 7,
+    "question": "Are activities allied to agriculture eligible under MUDRA?",
+    "answerable": true,
+    "expected_keywords": ["agriculture", "dairy", "poultry"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 8,
+    "question": "Are homestay businesses covered under MUDRA?",
+    "answerable": true,
+    "expected_keywords": ["homestay", "services"],
+    "expected_source": "pmmy_faq.pdf"
+  },
+  {
+    "id": 9,
+    "question": "What is the maximum loan amount under the Stand-Up India scheme?",
+    "answerable": true,
+    "expected_keywords": ["1 crore"],
+    "expected_source": "standup_faq.pdf"
+  },
+  {
+    "id": 10,
+    "question": "What is the minimum loan amount under the Stand-Up India scheme?",
+    "answerable": true,
+    "expected_keywords": ["10 lakh"],
+    "expected_source": "standup_faq.pdf"
+  },
+  {
+    "id": 11,
+    "question": "Who can apply under the Stand-Up India scheme?",
+    "answerable": true,
+    "expected_keywords": ["women", "SC", "ST"],
+    "expected_source": "standup_faq.pdf"
+  },
+  {
+    "id": 12,
+    "question": "What type of enterprise is supported under Stand-Up India?",
+    "answerable": true,
+    "expected_keywords": ["greenfield"],
+    "expected_source": "standup_faq.pdf"
+  },
+  {
+    "id": 13,
+    "question": "What is the exact current SBI interest rate for a Rs. 3 lakh Mudra loan?",
+    "answerable": false,
+    "expected_keywords": [],
+    "expected_source": null
+  },
+  {
+    "id": 14,
+    "question": "What is my personal MUDRA loan application status?",
+    "answerable": false,
+    "expected_keywords": [],
+    "expected_source": null
+  },
+  {
+    "id": 15,
+    "question": "What is the exact bank branch address where I should submit my loan application?",
+    "answerable": false,
+    "expected_keywords": [],
+    "expected_source": null
+  }
+]
