@@ -189,3 +189,42 @@ def search_semantic(q: str = Query(..., min_length=1), limit: int = Query(5, ge=
         "total_results": len(results),
         "results": results
     }
+
+# Day 08 - RAG Question Answering API
+from app.rag import ask_question
+
+
+class AskRequest(BaseModel):
+    question: str = Field(min_length=1, max_length=2000)
+    top_k: int = Field(default=4, ge=1, le=10)
+
+
+@app.post("/ask")
+def ask(request: AskRequest):
+    question = request.question.strip()
+
+    if not question:
+        raise HTTPException(
+            status_code=400,
+            detail="Question cannot be empty"
+        )
+
+    try:
+        result = ask_question(
+            question,
+            top_k=request.top_k
+        )
+
+        return {
+            "question": question,
+            "answer": result["answer"],
+            "found": result["found"],
+            "citations": result["citations"],
+            "retrieved_chunks": result["retrieved_chunks"]
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=502,
+            detail="Unable to process the RAG request"
+        )
