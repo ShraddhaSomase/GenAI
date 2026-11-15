@@ -148,11 +148,12 @@ def chat(request: ChatRequest):
         )
 
     try:
-        answer = get_llm_response(question)
+        result = get_llm_response(question)
 
         return {
-            "question": question,
-            "answer": answer
+            "answer": result["answer"],
+            "confidence": result["confidence"],
+            "follow_up": result["follow_up"]
         }
 
     except RuntimeError as e:
@@ -166,4 +167,3 @@ def chat(request: ChatRequest):
             status_code=502,
             detail="LLM provider request failed"
         )
-
