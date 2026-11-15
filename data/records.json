@@ -153246,5 +153246,13 @@
         "delinquencies_2_years": 0,
         "public_records": 0,
         "not_fully_paid": 1
+    },
+    {
+        "loan_category": "Stand-Up India",
+        "amount_range": "Not confirmed from the extracted section",
+        "who_can_apply": "Eligibility details to be extracted from the earlier FAQ pages",
+        "margin_or_contribution": "At least 10% own contribution; margin support up to 15% of project cost, as described in the historical FAQ",
+        "repayment": "Maximum 7 years, including a moratorium period of up to 18 months",
+        "source_doc": "standup_faq.pdf"
     }
 ]
