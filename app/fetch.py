@@ -1,51 +1,102 @@
 
 import requests
-import zipfile
+import time
 from pathlib import Path
 
 RAW_DIR = Path("data/raw")
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-URL = "https://huggingface.co/datasets/AnguloM/loan_data/resolve/main/loan.zip"
-ZIP_PATH = RAW_DIR / "loan.zip"
+SOURCES = {
+    "pmmy_faq.pdf": (
+        "https://static.pib.gov.in/WriteReadData/"
+        "specificdocs/documents/2025/sep/"
+        "doc2025927648901.pdf"
+    ),
+    "standup_faq.pdf": (
+        "https://static.pib.gov.in/WriteReadData/"
+        "specificdocs/documents/2022/apr/"
+        "doc20224535701.pdf"
+    ),
+    "standup_update.html": (
+        "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2334978"
+    )
+}
+
+
+def download_file(filename, url):
+
+    output_path = RAW_DIR / filename
+
+    for attempt in range(1, 4):
+
+        try:
+            print(f"\nDownloading {filename}...")
+            print(f"Attempt {attempt}/3")
+
+            response = requests.get(
+                url,
+                timeout=(15, 60),
+                headers={
+                    "User-Agent": "Mozilla/5.0"
+                }
+            )
+
+            response.raise_for_status()
+
+            content = response.content
+
+            if filename.endswith(".pdf"):
+                if not content.startswith(b"%PDF"):
+                    raise ValueError(
+                        "Downloaded content is not a valid PDF."
+                    )
+
+            elif filename.endswith(".html"):
+                if not content.strip():
+                    raise ValueError("Downloaded HTML is empty.")
+
+            output_path.write_bytes(content)
+
+            print("Download successful!")
+            print("Saved:", output_path)
+
+            return True
+
+        except (
+            requests.exceptions.RequestException,
+            OSError,
+            ValueError
+        ) as error:
+
+            print("Download failed:", error)
+
+            if attempt < 3:
+                print("Retrying in 3 seconds...")
+                time.sleep(3)
+
+    print(f"Could not download {filename}.")
+    return False
+
 
 def download_dataset():
-    try:
-        print("Downloading historical loan dataset...")
 
-        response = requests.get(URL, timeout=60)
-        response.raise_for_status()
+    print("\n========== OFFICIAL DATA DOWNLOAD ==========")
 
-        ZIP_PATH.write_bytes(response.content)
+    successful = 0
 
-        print("Download successful!")
+    for filename, url in SOURCES.items():
 
-        with zipfile.ZipFile(ZIP_PATH, "r") as zip_file:
-            csv_files = [
-                name for name in zip_file.namelist()
-                if name.lower().endswith(".csv")
-            ]
+        if download_file(filename, url):
+            successful += 1
 
-            if not csv_files:
-                raise ValueError("No CSV file found inside ZIP.")
+    print("\n========== DOWNLOAD REPORT ==========")
+    print("Successful:", successful)
+    print("Failed:", len(SOURCES) - successful)
 
-            selected_file = csv_files[0]
-
-            with zip_file.open(selected_file) as source:
-                output_path = RAW_DIR / "loan_data.csv"
-                output_path.write_bytes(source.read())
-
-        print("CSV extracted:", output_path)
-        print("Source:", URL)
-
-    except requests.exceptions.Timeout:
-        print("Error: Download timed out.")
-
-    except requests.exceptions.RequestException as error:
-        print("Download error:", error)
-
-    except (zipfile.BadZipFile, ValueError, OSError) as error:
-        print("File error:", error)
+    if successful == len(SOURCES):
+        print("All official documents downloaded!")
+    else:
+        print("Some downloads failed. Check the errors above.")
 
 
 if __name__ == "__main__":
