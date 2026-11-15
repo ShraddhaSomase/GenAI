@@ -1,4 +1,4 @@
-
+﻿
 import json
 from pathlib import Path
 
@@ -6,7 +6,7 @@ from pathlib import Path
 DATA_FILE = (
     Path(__file__).resolve().parent.parent
     / "data"
-    / "sample_records.json"
+    / "records.json"
 )
 
 
