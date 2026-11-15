@@ -58,7 +58,7 @@
                     "citation_present": true,
                     "expected_source_found": true,
                     "keyword_score": 0.33,
-                    "answer": "Under the Tarun category, the loan amount ranges from above Rs.5.00 lakh up to Rs.10.00 lakh.",
+                    "answer": "The Tarun category covers loans above Rs.5.00 lakh and up to Rs.10.00 lakh.",
                     "citations": [
                         {
                             "citation": 1,
@@ -251,7 +251,7 @@
                     "citation_present": true,
                     "expected_source_found": true,
                     "keyword_score": 1.0,
-                    "answer": "The Stand‑Up India scheme supports the setting up of a greenfield enterprise.",
+                    "answer": "The scheme supports the setting up of a greenfield enterprise.",
                     "citations": [
                         {
                             "citation": 1,
@@ -379,7 +379,7 @@
                     "citation_present": true,
                     "expected_source_found": true,
                     "keyword_score": 0.33,
-                    "answer": "Under the Tarun category, the loan amount ranges from above Rs.5.00 lakh up to Rs.10.00 lakh.",
+                    "answer": "The Tarun category provides loans above Rs. 5.00 lakh and up to Rs. 10.00 lakh.",
                     "citations": [
                         {
                             "citation": 1,
@@ -520,7 +520,7 @@
                     "citation_present": true,
                     "expected_source_found": true,
                     "keyword_score": 1.0,
-                    "answer": "The maximum loan amount under the Stand‑Up India scheme is 1 crore rupees.",
+                    "answer": "The maximum loan amount under the Stand‑Up India Scheme is 1 crore rupees.",
                     "citations": [
                         {
                             "citation": 4,
