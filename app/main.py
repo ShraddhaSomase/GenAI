@@ -17,6 +17,7 @@ from pydantic import BaseModel
 
 from app import records as rec
 from app.smart_search import smart_search
+from app.vectorstore import semantic_search
 
 # Create FastAPI application
 app = FastAPI(
@@ -167,3 +168,24 @@ def chat(request: ChatRequest):
             status_code=502,
             detail="LLM provider request failed"
         )
+
+
+
+# Day 07 - Semantic Search using ChromaDB
+@app.get("/search/semantic")
+def search_semantic(q: str = Query(..., min_length=1), limit: int = Query(5, ge=1, le=20)):
+    question = q.strip()
+
+    if not question:
+        raise HTTPException(
+            status_code=400,
+            detail="Search query cannot be empty"
+        )
+
+    results = semantic_search(question, n_results=limit)
+
+    return {
+        "query": question,
+        "total_results": len(results),
+        "results": results
+    }
