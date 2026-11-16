@@ -1,0 +1,162 @@
+[
+    {
+        "id": 1,
+        "question": "What are the different categories available under the Pradhan Mantri Mudra Yojana (PMMY)?",
+        "v1": {
+            "answer": "The Pradhan Mantri Mudra Yojana (PMMY) has four loan categories: Shishu, Kishor, Tarun, and Tarun Plus.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria or loan amount ranges for each category?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The Pradhan Mantri Mudra Yojana (PMMY) has four loan categories: Shishu, Kishor, Tarun, and Tarun Plus.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria or loan amount ranges for any of these categories?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 2,
+        "question": "Which Mudra category is suitable for a loan amount of Rs. 3 lakh?",
+        "v1": {
+            "answer": "The loan amount of Rs. 3 lakh falls under the Kishor category of the PMMY MUDRA scheme.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria or repayment terms for the Kishor category?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The Rs. 3 lakh loan falls under the Kishor category, which covers loans above Rs. 50,000 and up to Rs. 5 lakh.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria or how to apply for a Kishor loan?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 3,
+        "question": "What is the maximum loan amount available under the Shishu category?",
+        "v1": {
+            "answer": "The maximum loan amount available under the Shishu category is up to Rs. 50,000/-.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria for a Shishu loan?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The maximum loan amount available under the Shishu category is up to Rs. 50,000.",
+            "confidence": "high",
+            "follow_up": "Would you like to know who can apply for a Shishu loan or how the repayment works?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 4,
+        "question": "What is the loan amount range under the Kishor category?",
+        "v1": {
+            "answer": "The Kishor category covers loans above Rs. 50,000 and up to Rs. 5.00 lakh.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria for the Kishor category?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The Kishor category covers loans above Rs. 50,000 and up to Rs. 5.00 lakh.",
+            "confidence": "high",
+            "follow_up": "Would you like to know who can apply for a Kishor loan or its repayment terms?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 5,
+        "question": "What is the loan amount range under the Tarun category?",
+        "v1": {
+            "answer": "The Tarun category covers loans above Rs. 5.00 lakh and up to Rs. 10.00 lakh.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria or repayment terms for the Tarun category?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The Tarun category covers loans above Rs. 5.00 lakh and up to Rs. 10.00 lakh.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria for the Tarun category?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 6,
+        "question": "What is the exact current interest rate offered by SBI for a Rs. 3 lakh Mudra loan?",
+        "v1": {
+            "answer": "The retrieved records do not contain any information about the current interest rate offered by SBI for a Rs. 3 lakh Mudra loan.",
+            "confidence": "low",
+            "follow_up": "Would you like to know where you can find the latest interest rates for SBI Mudra loans?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The retrieved records do not contain any information about the interest rate offered by SBI for a Rs. 3 lakh Mudra loan.",
+            "confidence": "low",
+            "follow_up": "You might want to visit SBI’s official website or contact their customer service for the most up-to-date interest rate details.",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 7,
+        "question": "What is the maximum loan amount available under the Tarun Plus category?",
+        "v1": {
+            "answer": "The maximum loan amount available under the Tarun Plus category is Rs. 20.00 lakh.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria for the Tarun Plus category?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The maximum loan amount available under the Tarun Plus category is Rs. 20.00 lakh.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria for applying under the Tarun Plus category?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 8,
+        "question": "What is the eligibility condition for applying under the Tarun Plus category?",
+        "v1": {
+            "answer": "To be eligible for a Tarun Plus MUDRA loan you must be an Indian citizen with a business plan for a non‑farm income‑generating activity (manufacturing, processing, trading or services). Your credit need should be up to ₹20 lakh, and you must have successfully repaid a previous Tarun‑category loan.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the repayment terms or the amount range for Tarun Plus?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "To be eligible for a Tarun Plus MUDRA loan, you must be an Indian citizen with a business plan for a non‑farm income‑generating activity (such as manufacturing, processing, trading or services), need credit up to ₹20 lakh, and you must have successfully repaid a previous Tarun‑category loan.",
+            "confidence": "high",
+            "follow_up": "Would you like to know about the repayment terms or the margin/contribution required for a Tarun Plus loan?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 9,
+        "question": "What types of businesses are represented in the MudraMitra records?",
+        "v1": {
+            "answer": "The records indicate that the businesses represented are non‑farm income‑generating activities, specifically manufacturing, processing, trading, and service sector enterprises.",
+            "confidence": "high",
+            "follow_up": "Would you like to know the eligibility criteria for a particular Mudra loan category?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The records indicate that eligible businesses are non‑farm, income‑generating activities in the manufacturing, processing, trading, or service sectors.",
+            "confidence": "high",
+            "follow_up": "Would you like to know which specific industries within those sectors are most common for Mudra loans?",
+            "correct": "Review"
+        }
+    },
+    {
+        "id": 10,
+        "question": "According to the records, who decides the repayment period and terms?",
+        "v1": {
+            "answer": "The retrieved records do not specify who decides the repayment period and terms for MUDRA loans.",
+            "confidence": "low",
+            "follow_up": "Would you like to know which institution typically sets the repayment terms for MUDRA loans?",
+            "correct": "Review"
+        },
+        "v2": {
+            "answer": "The retrieved records do not specify who decides the repayment period and terms for MUDRA loans.",
+            "confidence": "low",
+            "follow_up": "Would you like to know which institutions typically set these terms?",
+            "correct": "Review"
+        }
+    }
+]
