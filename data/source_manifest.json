@@ -1,0 +1,19 @@
+{
+    "project": "MudraMitra",
+    "documents": [
+        {
+            "filename": "pmmy_faq.pdf",
+            "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/sep/doc2025927648901.pdf",
+            "local_path": "data/raw/pmmy_faq.pdf",
+            "ocr_output": "data/raw/pmmy_ocr.txt"
+        },
+        {
+            "filename": "standup_faq.pdf",
+            "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2022/apr/doc20224535701.pdf",
+            "local_path": "data/raw/standup_faq.pdf"
+        }
+    ],
+    "download_command": "python -m app.fetch",
+    "ocr_command": "python -m app.ocr_all_pages",
+    "ingestion_command": "python -m app.ingest"
+}

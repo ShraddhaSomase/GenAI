@@ -1,170 +1,34 @@
 [
     {
         "loan_category": "Shishu",
-        "amount_range": "Up to Rs. 50,000",
-        "who_can_apply": "Small grocery shop owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Shishu",
-        "amount_range": "Up to Rs. 50,000",
-        "who_can_apply": "Tailors and small tailoring business owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Shishu",
-        "amount_range": "Up to Rs. 50,000",
-        "who_can_apply": "Small food vendors and food entrepreneurs",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Shishu",
-        "amount_range": "Up to Rs. 50,000",
-        "who_can_apply": "Mobile repair technicians and small business owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Shishu",
-        "amount_range": "Up to Rs. 50,000",
-        "who_can_apply": "Beauty professionals and small salon owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
+        "amount_range": "upto Rs.50,000/-",
+        "who_can_apply": "Any Indian Citizen who has a business plan for a non-farm income generating activity such as manufacturing, processing, trading or service sector whose credit need is up to 20 lakh can approach either a Bank, MFI or NBFC for availing of MUDRA loans",
+        "margin_or_contribution": "Not specified in the extracted PMMY FAQ. Confirm with the lending institution.",
+        "repayment": "Cash Credit - Yearly review. ii. Term Loan - Maximum tenure should not exceed 7 years",
+        "source_doc": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/sep/doc2025927648901.pdf (PMMY FAQ, pages 4, 18-19 and 21)"
     },
     {
         "loan_category": "Kishor",
-        "amount_range": "Above Rs. 50,000 to Rs. 5 lakh",
-        "who_can_apply": "Eligible dairy entrepreneurs and small business owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Kishor",
-        "amount_range": "Above Rs. 50,000 to Rs. 5 lakh",
-        "who_can_apply": "Small manufacturers and eligible entrepreneurs",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Kishor",
-        "amount_range": "Above Rs. 50,000 to Rs. 5 lakh",
-        "who_can_apply": "Eligible service-sector entrepreneurs",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Kishor",
-        "amount_range": "Above Rs. 50,000 to Rs. 5 lakh",
-        "who_can_apply": "Eligible small transport operators",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Kishor",
-        "amount_range": "Above Rs. 50,000 to Rs. 5 lakh",
-        "who_can_apply": "Artisans and handicraft entrepreneurs",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun",
-        "amount_range": "Above Rs. 5 lakh to Rs. 10 lakh",
-        "who_can_apply": "Eligible restaurant and food-service business owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun",
-        "amount_range": "Above Rs. 5 lakh to Rs. 10 lakh",
-        "who_can_apply": "Eligible garment manufacturers",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun",
-        "amount_range": "Above Rs. 5 lakh to Rs. 10 lakh",
-        "who_can_apply": "Eligible poultry entrepreneurs",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun",
-        "amount_range": "Above Rs. 5 lakh to Rs. 10 lakh",
-        "who_can_apply": "Eligible printing and publishing business owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun",
-        "amount_range": "Above Rs. 5 lakh to Rs. 10 lakh",
-        "who_can_apply": "Eligible workshop and repair business owners",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
+        "amount_range": "above Rs.50,000/- and upto Rs. 5.00 Lakh",
+        "who_can_apply": "Any Indian Citizen who has a business plan for a non-farm income generating activity such as manufacturing, processing, trading or service sector whose credit need is up to 20 lakh can approach either a Bank, MFI or NBFC for availing of MUDRA loans",
+        "margin_or_contribution": "Not specified in the extracted PMMY FAQ. Confirm with the lending institution.",
+        "repayment": "Cash Credit - Yearly review. ii. Term Loan - Maximum tenure should not exceed 7 years",
+        "source_doc": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/sep/doc2025927648901.pdf (PMMY FAQ, pages 4, 18-19 and 21)"
     },
     {
         "loan_category": "Tarun Plus",
-        "amount_range": "Above Rs. 10 lakh to Rs. 20 lakh",
-        "who_can_apply": "Entrepreneurs who successfully repaid a previous Tarun loan",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
+        "amount_range": "above Rs. 10.00 lakh and upto Rs. 20.00 lakh",
+        "who_can_apply": "Any Indian Citizen who has a business plan for a non-farm income generating activity such as manufacturing, processing, trading or service sector whose credit need is up to 20 lakh can approach either a Bank, MFI or NBFC for availing of MUDRA loans. Additionally, the applicant must have successfully repaid a previous Tarun-category loan.",
+        "margin_or_contribution": "Not specified in the extracted PMMY FAQ. Confirm with the lending institution.",
+        "repayment": "Cash Credit - Yearly review. ii. Term Loan - Maximum tenure should not exceed 7 years",
+        "source_doc": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/sep/doc2025927648901.pdf (PMMY FAQ, pages 4, 18-19 and 21)"
     },
     {
-        "loan_category": "Tarun Plus",
-        "amount_range": "Above Rs. 10 lakh to Rs. 20 lakh",
-        "who_can_apply": "Entrepreneurs who successfully repaid a previous Tarun loan",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun Plus",
-        "amount_range": "Above Rs. 10 lakh to Rs. 20 lakh",
-        "who_can_apply": "Entrepreneurs who successfully repaid a previous Tarun loan",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun Plus",
-        "amount_range": "Above Rs. 10 lakh to Rs. 20 lakh",
-        "who_can_apply": "Entrepreneurs who successfully repaid a previous Tarun loan",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Tarun Plus",
-        "amount_range": "Above Rs. 10 lakh to Rs. 20 lakh",
-        "who_can_apply": "Entrepreneurs who successfully repaid a previous Tarun loan",
-        "margin_or_contribution": "As per lending institution policy",
-        "repayment": "As decided by the lender",
-        "source_doc": "https://www.financialservices.gov.in/pradhan-mantri-mudra-yojana-pmmy"
-    },
-    {
-        "loan_category": "Stand-Up India",
-        "amount_range": "Not confirmed from the extracted section",
-        "who_can_apply": "Eligibility details to be extracted from the earlier FAQ pages",
-        "margin_or_contribution": "At least 10% own contribution; margin support up to 15% of project cost, as described in the historical FAQ",
-        "repayment": "Maximum 7 years, including a moratorium period of up to 18 months",
-        "source_doc": "standup_faq.pdf"
+        "loan_category": "Tarun",
+        "amount_range": "above Rs. 5.00 lakh and upto Rs.10.00 lakh",
+        "who_can_apply": "Any Indian Citizen who has a business plan for a non-farm income generating activity such as manufacturing, processing, trading or service sector whose credit need is up to 20 lakh can approach either a Bank, MFI or NBFC for availing of MUDRA loans",
+        "margin_or_contribution": "Not specified in the extracted PMMY FAQ. Confirm with the lending institution.",
+        "repayment": "Cash Credit - Yearly review. ii. Term Loan - Maximum tenure should not exceed 7 years",
+        "source_doc": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/sep/doc2025927648901.pdf (PMMY FAQ, pages 4, 18-19 and 21)"
     }
 ]
