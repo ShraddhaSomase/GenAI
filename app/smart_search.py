@@ -44,6 +44,22 @@ def smart_search(records, question, top_k=3, diversify_categories=False):
     if not records or not question:
         return []
 
+    # Expand common business-related questions with MUDRA terms.
+    expanded_question = question
+    business_terms = (
+        "business",
+        "businesses",
+        "business type",
+        "business activity",
+        "business activities",
+    )
+
+    if any(term in question.lower() for term in business_terms):
+        expanded_question += (
+            " manufacturing processing trading service sector "
+            "non-farm income generating activity"
+        )
+
     records = remove_duplicates(records)
     documents = [record_to_text(record) for record in records]
 
@@ -51,7 +67,7 @@ def smart_search(records, question, top_k=3, diversify_categories=False):
 
     try:
         document_matrix = vectorizer.fit_transform(documents)
-        question_vector = vectorizer.transform([question])
+        question_vector = vectorizer.transform([expanded_question])
     except ValueError:
         return []
 
