@@ -2,3 +2,7 @@ fastapi
 uvicorn
 pandas
 scikit-learn
+
+langgraph
+langgraph-checkpoint-sqlite
+langchain-core

@@ -228,3 +228,81 @@ def ask(request: AskRequest):
             status_code=502,
             detail="Unable to process the RAG request"
         )
+
+# Day 09 - LangGraph Agent API
+from langchain_core.messages import HumanMessage
+from langgraph.types import Command
+from app.graph import agent_graph
+
+
+class AgentRequest(BaseModel):
+    question: Optional[str] = None
+    thread_id: str = Field(min_length=1, max_length=100)
+    approved: Optional[bool] = None
+
+
+@app.post("/agent")
+def run_langgraph_agent(request: AgentRequest):
+
+    config = {
+        "configurable": {
+            "thread_id": request.thread_id
+        }
+    }
+
+    try:
+        # First request: start a new agent conversation
+        if request.approved is None:
+
+            question = (request.question or "").strip()
+
+            if not question:
+                raise HTTPException(
+                    status_code=400,
+                    detail="Question is required."
+                )
+
+            result = agent_graph.invoke(
+                {
+                    "messages": [
+                        HumanMessage(content=question)
+                    ],
+                    "tools_used": []
+                },
+                config=config
+            )
+
+        # Follow-up request: resume after human approval
+        else:
+
+            result = agent_graph.invoke(
+                Command(resume=request.approved),
+                config=config
+            )
+
+        # Check whether the graph is waiting for approval
+        interruptions = result.get("__interrupt__", [])
+
+        if interruptions:
+            return {
+                "status": "approval_required",
+                "thread_id": request.thread_id,
+                "approval": interruptions[0].value
+            }
+
+        return {
+            "status": "completed",
+            "thread_id": request.thread_id,
+            "answer": result.get("answer", ""),
+            "tools_used": result.get("tools_used", [])
+        }
+
+    except HTTPException:
+        raise
+
+    except Exception as error:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Agent execution failed: {str(error)}"
+        )
+

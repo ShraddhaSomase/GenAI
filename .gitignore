@@ -4,3 +4,8 @@ __pycache__/
 .env
 data/chroma_db/
 data/raw/
+
+# LangGraph persistent memory
+data/agent_memory.sqlite
+data/agent_memory.sqlite-shm
+data/agent_memory.sqlite-wal
