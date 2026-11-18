@@ -10,7 +10,7 @@ from app.vectorstore import hybrid_search
 MODEL_NAME = "openai/gpt-oss-20b"
 
 
-def ask_question(question, top_k=4):
+def ask_question(question, top_k=10):
     """Answer a question using retrieved document chunks and citations."""
 
     question = question.strip()
@@ -97,7 +97,7 @@ Answer using only the document context.
             {"role": "user", "content": user_prompt}
         ],
         temperature=0,
-        max_tokens=700
+        max_tokens=2000
     )
 
     raw_answer = response.choices[0].message.content or ""
