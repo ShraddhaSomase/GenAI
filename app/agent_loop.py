@@ -30,6 +30,12 @@ You can use these tools:
    Arguments: {"question": "text", "top_k": 4}
    Purpose: Answer questions using MUDRA documents with citations.
 
+5. emi_schedule
+   Arguments: {"loan_amount": 100000, "annual_rate": 12, "months": 12}
+   Purpose: Calculate monthly EMI and provide a month-wise principal and interest schedule.
+
+For EMI or loan repayment calculations, use emi_schedule instead of calculating manually.
+
 Choose a tool when the question requires information from records
 or documents.
 

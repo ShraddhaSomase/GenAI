@@ -69,6 +69,12 @@ Arguments: {"record_id": "LN-000001"}
 4. rag_search
 Arguments: {"question": "text", "top_k": 4}
 
+5. emi_schedule
+Arguments: {"loan_amount": 100000, "annual_rate": 12, "months": 12}
+Purpose: Calculate monthly EMI and provide a month-wise principal and interest schedule.
+
+For EMI or loan repayment calculations, use emi_schedule instead of calculating manually.
+
 Choose a tool when the question requires records or document information.
 
 Return only JSON.
