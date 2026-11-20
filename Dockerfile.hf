@@ -1,0 +1,43 @@
+# ── MudraMitra — Hugging Face Spaces ─────────────────────────────────────────
+# HF Spaces requires the app to listen on port 7860.
+# CPU-only image; embedding model loaded lazily on first request.
+
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir --prefix=/install \
+    "torch==2.2.2+cpu" \
+    --index-url https://download.pytorch.org/whl/cpu
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt \
+        --extra-index-url https://download.pytorch.org/whl/cpu
+
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY --from=builder /install /usr/local
+
+COPY app/        ./app/
+COPY prompts/    ./prompts/
+COPY data/records.json         ./data/records.json
+COPY data/source_manifest.json ./data/source_manifest.json
+COPY data/standup_faq.txt      ./data/standup_faq.txt
+COPY data/feedback.json        ./data/feedback.json
+COPY data/questions.json       ./data/questions.json
+
+RUN mkdir -p /app/data/chroma_db
+
+# HF Spaces runs as root; no useradd needed
+EXPOSE 7860
+
+ENV PORT=7860
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
