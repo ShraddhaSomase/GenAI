@@ -26,6 +26,38 @@ MudraMitra is a simple Python project that I am developing to manage financial r
    ```
 4. Open http://127.0.0.1:8000/docs to try the endpoints.
 
+---
+
+## Run with Docker
+
+The easiest way to start the full stack (API + UI) is Docker Compose.
+
+### Prerequisites
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+- A `.env` file in the project root with your Groq API key (see `.env.example`).
+
+### Start everything
+
+```powershell
+docker compose up --build
+```
+
+| Service | URL |
+|---|---|
+| FastAPI backend | http://localhost:8000 |
+| Streamlit chat UI | http://localhost:8501 |
+| API docs (Swagger) | http://localhost:8000/docs |
+
+### Stop
+
+```powershell
+docker compose down
+```
+
+ChromaDB embeddings and agent SQLite memory are stored in named Docker volumes (`chroma_data`, `sqlite_data`) and survive container restarts.
+
+---
+
 ## Endpoints
 | Method | Path | What it does |
 | GET | `/health` | Health check |
@@ -40,6 +72,25 @@ python -m app.smart_search     # try the ranking in the terminal
 python -m app.cli              # Day 2 menu
 ```
 
+
+## Tests
+
+46 pytest tests cover records, smart search, `/health`, `/records`, `/ask` with a fake LLM, and agent tools (EMI calculator).
+
+```powershell
+# From the project root with the venv active:
+python -m pytest tests/ -v
+```
+
+Linting:
+
+```powershell
+ruff check .
+```
+
+Both commands must exit 0 before any commit.
+
+---
 
 ## Day 8 - RAG Question Answering
 

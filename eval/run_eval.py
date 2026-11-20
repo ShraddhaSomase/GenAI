@@ -3,7 +3,6 @@ from pathlib import Path
 
 from app.rag import ask_question
 
-
 EVAL_FILE = Path("eval/eval_set.json")
 RESULT_FILE = Path("eval/eval_results.json")
 

@@ -1,0 +1,56 @@
+version: "3.9"
+
+# ── MudraMitra — docker compose up ───────────────────────────────────────────
+#
+# Services:
+#   api  — FastAPI backend  → http://localhost:8000
+#   ui   — Streamlit chat   → http://localhost:8501
+#
+# Usage:
+#   docker compose up --build          # first time
+#   docker compose up                  # subsequent runs
+#   docker compose down                # stop and remove containers
+
+services:
+
+  # ── FastAPI backend ─────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mudramitra_api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env                            # provides GROQ_API_KEY
+    volumes:
+      # Persist ChromaDB embeddings and agent SQLite memory across restarts
+      - chroma_data:/app/data/chroma_db
+      - sqlite_data:/app/data
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ── Streamlit UI ─────────────────────────────────────────────────────────────
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: mudramitra_ui
+    ports:
+      - "8501:8501"
+    environment:
+      # Tell the UI to find the API inside Docker's network
+      - API_BASE=http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  chroma_data:
+  sqlite_data:

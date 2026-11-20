@@ -1,13 +1,13 @@
 ﻿import html
 import json
-import urllib.request
+import os
 import urllib.error
+import urllib.request
+from datetime import UTC, datetime
 from pathlib import Path
-from datetime import datetime, timezone
 from uuid import uuid4
 
 import streamlit as st
-
 
 # =========================================================
 # CONFIGURATION
@@ -16,7 +16,9 @@ import streamlit as st
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 FEEDBACK_FILE = PROJECT_ROOT / "data" / "feedback.json"
 
-API_BASE = "http://127.0.0.1:8000"
+# Allow API_BASE to be overridden via environment variable so the same
+# image works both locally (127.0.0.1:8000) and inside Docker (api:8000).
+API_BASE = os.environ.get("API_BASE", "http://127.0.0.1:8000")
 ASK_URL   = f"{API_BASE}/ask"
 AGENT_URL = f"{API_BASE}/agent"
 
@@ -501,7 +503,7 @@ def save_feedback(question, answer, rating):
         "question": question,
         "answer": answer,
         "rating": rating,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
     })
     with open(FEEDBACK_FILE, "w", encoding="utf-8") as f:
         json.dump(feedback, f, indent=4, ensure_ascii=False)

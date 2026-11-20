@@ -1,7 +1,8 @@
-﻿import pymupdf
+﻿from pathlib import Path
+
+import pymupdf
 import pytesseract
 from PIL import Image
-from pathlib import Path
 
 pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Program Files\Tesseract-OCR\tesseract.exe"

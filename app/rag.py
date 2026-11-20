@@ -6,7 +6,6 @@ import re
 from app.llm import client
 from app.vectorstore import hybrid_search
 
-
 MODEL_NAME = "openai/gpt-oss-20b"
 
 

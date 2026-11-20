@@ -7,7 +7,6 @@ import chromadb
 from app.chunking import load_documents
 from app.embed import embed_texts
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = PROJECT_ROOT / "data" / "chroma_db"
 COLLECTION_NAME = "mudramitra_documents"

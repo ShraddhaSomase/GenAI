@@ -1,18 +1,17 @@
 ﻿import json
 import sqlite3
 from pathlib import Path
-from typing import Annotated, TypedDict, Any
+from typing import Annotated, Any, TypedDict
 
 from langchain_core.messages import AIMessage, AnyMessage
-from langgraph.graph import StateGraph, START, END
+from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.graph import END, START, StateGraph
 from langgraph.graph.message import add_messages
 from langgraph.types import interrupt
-from langgraph.checkpoint.sqlite import SqliteSaver
 
-from app.llm import client
 from app.agent_loop import MODEL_NAME
+from app.llm import client
 from app.tools import TOOLS, execute_tool
-
 
 # SQLite database for persistent conversation memory
 PROJECT_ROOT = Path(__file__).resolve().parent.parent

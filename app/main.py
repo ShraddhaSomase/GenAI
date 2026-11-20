@@ -10,7 +10,6 @@ Docs: http://127.0.0.1:8000/docs
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
@@ -46,7 +45,7 @@ def health():
 
 # 2. List records with optional limit
 @app.get("/records")
-def list_records(limit: Optional[int] = Query(None, ge=1)):
+def list_records(limit: int | None = Query(None, ge=1)):
     records = rec.load_records()
 
     return records[:limit] if limit else records
@@ -125,6 +124,7 @@ def submit_question(request: QuestionRequest):
 
 # Day 06 - LLM Chat Integration
 from pydantic import Field
+
 from app.llm import get_llm_response
 
 
@@ -232,13 +232,14 @@ def ask(request: AskRequest):
 # Day 09 - LangGraph Agent API
 from langchain_core.messages import HumanMessage
 from langgraph.types import Command
+
 from app.graph import agent_graph
 
 
 class AgentRequest(BaseModel):
-    question: Optional[str] = None
+    question: str | None = None
     thread_id: str = Field(min_length=1, max_length=100)
-    approved: Optional[bool] = None
+    approved: bool | None = None
 
 
 @app.post("/agent")
@@ -303,6 +304,6 @@ def run_langgraph_agent(request: AgentRequest):
     except Exception as error:
         raise HTTPException(
             status_code=502,
-            detail=f"Agent execution failed: {str(error)}"
+            detail=f"Agent execution failed: {error!s}"
         )
 
