@@ -92,3 +92,56 @@ Built a Streamlit chat interface connected to the FastAPI backend.
 
 ![MudraMitra Day 10 Chat UI](screenshots/day10_chat_ui.jpeg)
 
+
+---
+
+## Checkpoint 2 — Live Demo
+
+### How to run
+
+Start the FastAPI backend (port 8000):
+```powershell
+uvicorn app.main:app --reload
+```
+
+In a second terminal, start the Streamlit UI:
+```powershell
+streamlit run ui/app.py
+```
+
+Open http://localhost:8501 in your browser.
+
+### What's new in Checkpoint 2
+
+#### 🎚️ Loan Amount Picker (Signature Feature)
+- A slider lets you drag from ₹10,000 to ₹1 crore.
+- The UI immediately highlights the matching **PMMY / MUDRA category** (Shishu · Kishor · Tarun · Tarun Plus) with its colour band.
+- When the amount falls in the **Stand-Up India** range (₹10 lakh – ₹1 crore), that scheme lights up alongside the MUDRA category.
+- **Document-disagreement note:** when Stand-Up India applies, a yellow warning box surfaces the conflict between the older FAQ (margin up to 25%) and the updated 2021-22 scheme terms (margin reduced to 15%) — directly from two different source documents.
+- A quick-reference table highlights the active row for every slider position.
+
+#### 💬 Dual response modes (sidebar toggle)
+| Mode | Endpoint | Best for |
+|---|---|---|
+| RAG (fast, cited) | `POST /ask` | Quick factual questions with citations |
+| Agent (uses tools) | `POST /agent` | Multi-step questions, EMI calculations, record search |
+
+The agent mode surfaces a human-approval banner when the LangGraph graph requests it, with Approve / Deny buttons that resume the graph.
+
+#### 👍 / 👎 Feedback
+- Thumbs up / down saved to `data/feedback.json` after every assistant reply.
+- Deduplication prevents double-saves across reruns.
+
+### Checkpoint 2 Screenshot
+
+![MudraMitra Checkpoint 2 — Loan Picker](screenshots/checkpoint2_loan_picker.png)
+
+> **Note:** Take a screenshot of the running UI and save it as `screenshots/checkpoint2_loan_picker.png` to display above.
+
+### Git tag
+
+```powershell
+git tag checkpoint-2
+git push origin checkpoint-2
+```
+
