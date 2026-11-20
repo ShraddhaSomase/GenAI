@@ -1,10 +1,9 @@
 ﻿"""Extract and chunk MUDRA and Stand-Up India documents."""
 
-from pathlib import Path
 import re
+from pathlib import Path
 
 from pypdf import PdfReader
-
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = PROJECT_ROOT / "data" / "raw"

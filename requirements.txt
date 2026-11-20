@@ -1,8 +1,18 @@
+# ── Runtime ───────────────────────────────────────────────────────────────────
 fastapi
-uvicorn
+uvicorn[standard]
 pandas
 scikit-learn
-
+groq
+python-dotenv
+chromadb
 langgraph
 langgraph-checkpoint-sqlite
 langchain-core
+streamlit
+pillow
+
+# ── Dev / test ────────────────────────────────────────────────────────────────
+pytest
+httpx
+ruff

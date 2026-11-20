@@ -1,0 +1,53 @@
+# ── .dockerignore ─────────────────────────────────────────────────────────────
+# Keeps the Docker build context small and avoids leaking secrets.
+
+# Python virtual environment
+.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+
+# Secrets — never bake the real .env into the image
+.env
+
+# Git
+.git/
+.gitignore
+
+# Tests (not needed in production image)
+tests/
+pytest_cache/
+.pytest_cache/
+
+# Dev tools
+ruff.toml
+.ruff_cache/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+
+# Large binary data — ChromaDB and SQLite are mounted as volumes
+data/chroma_db/
+data/agent_memory.sqlite
+data/agent_memory.sqlite-shm
+data/agent_memory.sqlite-wal
+data/raw/
+
+# Screenshots and docs (not needed at runtime)
+screenshots/
+docs/
+eval/
+analysis/
+
+# Backup / scratch files
+ui/app_backup.py
+data/records_backup_before_day4.json
+data/sample_records.py
+data/sample_records.json
+update_emi.py
+day01_intro.py
+day01_menu.py
+test_records.py

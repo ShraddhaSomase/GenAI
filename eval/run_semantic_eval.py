@@ -1,5 +1,5 @@
-﻿from pathlib import Path
-import re
+﻿import re
+from pathlib import Path
 
 from app.vectorstore import semantic_search
 

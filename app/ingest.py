@@ -1,12 +1,12 @@
 ﻿import json
 import re
-from pathlib import Path
 from dataclasses import asdict
 from html.parser import HTMLParser
+from pathlib import Path
 
 from pypdf import PdfReader
-from app.models import Record
 
+from app.models import Record
 
 RAW_DIR = Path("data/raw")
 OUTPUT_FILE = Path("data/records.json")
