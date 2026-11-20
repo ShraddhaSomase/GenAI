@@ -1,42 +1,44 @@
-# MudraMitra 
+# MudraMitra
+
+[![CI](https://github.com/ShraddhaSomase/GenAI/actions/workflows/ci.yml/badge.svg)](https://github.com/ShraddhaSomase/GenAI/actions/workflows/ci.yml)
+
+> **Live API (Hugging Face Spaces):** https://shraddhasomase-mudramitra.hf.space/health
+
+---
 
 # About
-MudraMitra is a simple Python project that I am developing to manage financial records. The main aim is to make it easier to add, view, and manage basic money-related information.
+MudraMitra is an AI-powered loan assistant for MUDRA (PMMY) and Stand-Up India schemes.  
+It answers questions using RAG over official government PDFs, provides source citations,
+runs a LangGraph agent with tool use, and surfaces a loan-amount picker that highlights
+scheme categories and document disagreements.
 
-# What it does
-- Helps manage financial records.
-- Provides a simple menu to interact with the program.
-- Stores records using JSON.
-- Uses basic Python concepts like functions, loops, and conditions.
+---
 
-## How to run
+## Quick start
 
-1. Create and activate a virtual environment (first time only):
-   ```powershell
-   python -m venv .venv
-   .venv\Scripts\activate
-   ```
-2. Install the dependencies:
-   ```powershell
-   pip install -r requirements.txt
-   ```
-3. Start the API from the project root:
-   ```powershell
-   uvicorn app.main:app --reload
-   ```
-4. Open http://127.0.0.1:8000/docs to try the endpoints.
+### Local (venv)
+
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# Terminal 1 — API
+uvicorn app.main:app --reload
+
+# Terminal 2 — UI
+streamlit run ui/app.py
+```
+
+| Service | URL |
+|---|---|
+| FastAPI backend | http://127.0.0.1:8000 |
+| Swagger docs | http://127.0.0.1:8000/docs |
+| Streamlit UI | http://localhost:8501 |
 
 ---
 
 ## Run with Docker
-
-The easiest way to start the full stack (API + UI) is Docker Compose.
-
-### Prerequisites
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
-- A `.env` file in the project root with your Groq API key (see `.env.example`).
-
-### Start everything
 
 ```powershell
 docker compose up --build
@@ -46,153 +48,103 @@ docker compose up --build
 |---|---|
 | FastAPI backend | http://localhost:8000 |
 | Streamlit chat UI | http://localhost:8501 |
-| API docs (Swagger) | http://localhost:8000/docs |
-
-### Stop
+| Swagger docs | http://localhost:8000/docs |
 
 ```powershell
-docker compose down
+docker compose down   # stop
 ```
 
-ChromaDB embeddings and agent SQLite memory are stored in named Docker volumes (`chroma_data`, `sqlite_data`) and survive container restarts.
+ChromaDB embeddings and agent SQLite memory persist in named Docker volumes.
 
 ---
 
-## Endpoints
-| Method | Path | What it does |
-| GET | `/health` | Health check |
-| GET | `/records?limit=5` | List records (optional limit) |
-| GET | `/records/{id}` | One record, 404 if missing |
-| GET | `/search?q=rent` | Top 3 records ranked by TF-IDF + cosine similarity |
-| POST | `/questions` | Save a user question to `data/questions.json` |
+## Live deployment
 
-## Other scripts
-python analysis/explore.py     # 3 facts about the data (pandas)
-python -m app.smart_search     # try the ranking in the terminal
-python -m app.cli              # Day 2 menu
-```
+| What | URL |
+|---|---|
+| **API health check** | https://shraddhasomase-mudramitra.hf.space/health |
+| **Swagger UI** | https://shraddhasomase-mudramitra.hf.space/docs |
+| HF Space | https://huggingface.co/spaces/ShraddhaSomase/mudramitra |
 
+---
+
+## CI / CD
+
+Every push and pull-request runs three GitHub Actions jobs:
+
+| Job | What it checks |
+|---|---|
+| **Ruff lint** | `ruff check .` must pass |
+| **Pytest** | All 46 tests must pass |
+| **Docker build** | Both `Dockerfile` and `Dockerfile.ui` must build |
+
+Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
+
+---
 
 ## Tests
 
-46 pytest tests cover records, smart search, `/health`, `/records`, `/ask` with a fake LLM, and agent tools (EMI calculator).
+46 pytest tests cover records, smart search, `/health`, `/records`, `/ask` with a fake LLM,
+and agent tools (EMI calculator).
 
 ```powershell
-# From the project root with the venv active:
 python -m pytest tests/ -v
-```
-
-Linting:
-
-```powershell
 ruff check .
 ```
 
-Both commands must exit 0 before any commit.
-
 ---
 
-## Day 8 - RAG Question Answering
-
-MudraMitra now uses Retrieval-Augmented Generation (RAG) to answer questions using PDF documents.
-
-## New Features
-- Hybrid search combines semantic search and keyword matching.
-- ChromaDB stores document embeddings.
-- Groq LLM generates answers using retrieved document context.
-- Answers include source, page number, and chunk ID citations.
-- The system refuses questions when information is unavailable.
-
-## New API Endpoint
+## API Endpoints
 
 | Method | Path | Description |
 |---|---|---|
-| POST | /ask | Answer questions using RAG with citations |
+| GET | `/health` | Health check — returns `{"status":"ok"}` |
+| GET | `/records` | List all loan records (optional `?limit=N`) |
+| GET | `/records/{id}` | Single record by position |
+| GET | `/search?q=` | TF-IDF smart search |
+| POST | `/questions` | Save a question |
+| POST | `/chat` | Direct LLM chat |
+| GET | `/search/semantic?q=` | ChromaDB semantic search |
+| POST | `/ask` | RAG question answering with citations |
+| POST | `/agent` | LangGraph agent with tool use + human approval |
 
-## Run RAG Evaluation
+---
 
-python -m eval.run_eval
+## Day 8 — RAG Question Answering
+
+Hybrid search (semantic + keyword, reciprocal rank fusion) over PMMY and Stand-Up India PDFs.
 
 ### Evaluation Results
 
-| Metric | top_k = 3 | top_k = 5 |
+| Metric | top_k=3 | top_k=5 |
 |---|---:|---:|
 | Answerability accuracy | 93.33% | 100.00% |
 | Citation coverage | 91.67% | 100.00% |
 | Source accuracy | 91.67% | 100.00% |
 | Keyword accuracy | 40.25% | 63.83% |
-| Overall score | 82.05% | 92.77% |
-
-**Best configuration: top_k = 5**
-
-Detailed results: eval/eval_results.json
-
-
-## Day 10 - MudraMitra Chat Interface
-
-Built a Streamlit chat interface connected to the FastAPI backend.
-
-### Features
-- Interactive chatbot for asking MUDRA-related questions.
-- RAG-based answers using PDF documents.
-- Source citations with page numbers and chunk IDs.
-- Thumbs up/down feedback system.
-- Feedback stored in JSON format.
-
-### Chatbot Screenshot
-
-![MudraMitra Day 10 Chat UI](screenshots/day10_chat_ui.jpeg)
-
+| **Overall score** | 82.05% | **92.77%** |
 
 ---
 
-## Checkpoint 2 — Live Demo
+## Checkpoint 2 — Loan Picker + Agent UI
 
-### How to run
+### Features
+- **Loan Amount Picker slider** — drag ₹10K–₹1Cr; matching PMMY band highlights instantly.
+- **Stand-Up India** band activates for ₹10L–₹1Cr alongside the PMMY band.
+- **Document-conflict note** — surfaces the 25% → 15% margin disagreement between source docs.
+- **Dual mode**: RAG (fast, cited) or Agent (multi-step tool use with human approval).
+- **Thumbs feedback** saved to `data/feedback.json`.
 
-Start the FastAPI backend (port 8000):
-```powershell
-uvicorn app.main:app --reload
-```
-
-In a second terminal, start the Streamlit UI:
-```powershell
-streamlit run ui/app.py
-```
-
-Open http://localhost:8501 in your browser.
-
-### What's new in Checkpoint 2
-
-#### 🎚️ Loan Amount Picker (Signature Feature)
-- A slider lets you drag from ₹10,000 to ₹1 crore.
-- The UI immediately highlights the matching **PMMY / MUDRA category** (Shishu · Kishor · Tarun · Tarun Plus) with its colour band.
-- When the amount falls in the **Stand-Up India** range (₹10 lakh – ₹1 crore), that scheme lights up alongside the MUDRA category.
-- **Document-disagreement note:** when Stand-Up India applies, a yellow warning box surfaces the conflict between the older FAQ (margin up to 25%) and the updated 2021-22 scheme terms (margin reduced to 15%) — directly from two different source documents.
-- A quick-reference table highlights the active row for every slider position.
-
-#### 💬 Dual response modes (sidebar toggle)
-| Mode | Endpoint | Best for |
-|---|---|---|
-| RAG (fast, cited) | `POST /ask` | Quick factual questions with citations |
-| Agent (uses tools) | `POST /agent` | Multi-step questions, EMI calculations, record search |
-
-The agent mode surfaces a human-approval banner when the LangGraph graph requests it, with Approve / Deny buttons that resume the graph.
-
-#### 👍 / 👎 Feedback
-- Thumbs up / down saved to `data/feedback.json` after every assistant reply.
-- Deduplication prevents double-saves across reruns.
-
-### Checkpoint 2 Screenshot
+### Screenshot
 
 ![MudraMitra Checkpoint 2 — Loan Picker](screenshots/checkpoint2_loan_picker.png)
 
-> **Note:** Take a screenshot of the running UI and save it as `screenshots/checkpoint2_loan_picker.png` to display above.
+---
 
-### Git tag
+## Git tags
 
-```powershell
-git tag checkpoint-2
-git push origin checkpoint-2
-```
-
+| Tag | Contents |
+|---|---|
+| `checkpoint-1` | Day 1–5 records + search |
+| `checkpoint-2` | Loan picker, agent UI, citations, feedback |
+| `week-1` | Week 1 summary |

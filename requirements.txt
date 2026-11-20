@@ -6,6 +6,8 @@ scikit-learn
 groq
 python-dotenv
 chromadb
+pypdf
+sentence-transformers
 langgraph
 langgraph-checkpoint-sqlite
 langchain-core
