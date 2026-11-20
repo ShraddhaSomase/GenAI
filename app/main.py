@@ -1,5 +1,5 @@
 ﻿
-"""MudraMitra - FastAPI service (day-04).
+"""MudraMitra - FastAPI service.
 
 Run from the project root:
     uvicorn app.main:app --reload
@@ -8,6 +8,7 @@ Docs: http://127.0.0.1:8000/docs
 """
 
 import json
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -18,11 +19,14 @@ from app import records as rec
 from app.smart_search import smart_search
 from app.vectorstore import semantic_search
 
+APP_VERSION = "2.0.0"
+_START_TIME = time.time()
+
 # Create FastAPI application
 app = FastAPI(
     title="MudraMitra API",
-    description="API for managing loan records and user questions",
-    version="1.0.0"
+    description="AI-powered loan assistant for MUDRA and Stand-Up India schemes",
+    version=APP_VERSION,
 )
 
 # Questions file path
@@ -40,7 +44,12 @@ class QuestionRequest(BaseModel):
 # 1. Health check
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    uptime_seconds = int(time.time() - _START_TIME)
+    return {
+        "status": "ok",
+        "version": APP_VERSION,
+        "uptime_seconds": uptime_seconds,
+    }
 
 
 # 2. List records with optional limit
