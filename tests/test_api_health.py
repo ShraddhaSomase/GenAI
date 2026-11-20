@@ -6,7 +6,10 @@ class TestHealth:
     def test_health_returns_ok(self, api_client):
         response = api_client.get("/health")
         assert response.status_code == 200
-        assert response.json() == {"status": "ok"}
+        body = response.json()
+        assert body["status"] == "ok"
+        assert "version" in body
+        assert "uptime_seconds" in body
 
 
 class TestRecords:
