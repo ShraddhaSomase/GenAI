@@ -8,6 +8,7 @@ Docs: http://127.0.0.1:8000/docs
 """
 
 import json
+import logging
 import time
 from datetime import datetime
 from pathlib import Path
@@ -202,6 +203,12 @@ def search_semantic(q: str = Query(..., min_length=1), limit: int = Query(5, ge=
 # Day 08 - RAG Question Answering API
 from app.rag import ask_question
 
+logger = logging.getLogger("mudramitra.ask")
+
+ASK_CACHE = {}
+CACHE_MAX_SIZE = 128
+CACHE_TTL_SECONDS = 300
+
 
 class AskRequest(BaseModel):
     question: str = Field(min_length=1, max_length=2000)
@@ -210,6 +217,7 @@ class AskRequest(BaseModel):
 
 @app.post("/ask")
 def ask(request: AskRequest):
+    started_at = time.perf_counter()
     question = request.question.strip()
 
     if not question:
@@ -218,21 +226,78 @@ def ask(request: AskRequest):
             detail="Question cannot be empty"
         )
 
-    try:
-        result = ask_question(
-            question,
-            top_k=request.top_k
+    cache_key = (question.casefold(), request.top_k)
+    now = time.monotonic()
+
+    # Remove expired cache entries.
+    expired_keys = [
+        key
+        for key, value in ASK_CACHE.items()
+        if now - value["created_at"] >= CACHE_TTL_SECONDS
+    ]
+
+    for key in expired_keys:
+        ASK_CACHE.pop(key, None)
+
+    # Return cached answer when available.
+    cached = ASK_CACHE.get(cache_key)
+
+    if cached is not None:
+        elapsed_ms = (time.perf_counter() - started_at) * 1000
+
+        logger.info(
+            "ask_request latency_ms=%.2f cache_hit=true "
+            "prompt_tokens=0 completion_tokens=0 total_tokens=0",
+            elapsed_ms,
         )
 
-        return {
+        return cached["result"]
+
+    try:
+        result = ask_question(question, top_k=request.top_k)
+
+        token_usage = result.get("token_usage") or {}
+
+        response_data = {
             "question": question,
             "answer": result["answer"],
             "found": result["found"],
             "citations": result["citations"],
-            "retrieved_chunks": result["retrieved_chunks"]
+            "retrieved_chunks": result["retrieved_chunks"],
         }
 
+        # Save successful RAG responses in the cache.
+        if result["found"] is True:
+            if len(ASK_CACHE) >= CACHE_MAX_SIZE:
+                oldest_key = next(iter(ASK_CACHE))
+                ASK_CACHE.pop(oldest_key)
+
+            ASK_CACHE[cache_key] = {
+                "created_at": time.monotonic(),
+                "result": response_data,
+            }
+
+        elapsed_ms = (time.perf_counter() - started_at) * 1000
+
+        logger.info(
+            "ask_request latency_ms=%.2f cache_hit=false "
+            "prompt_tokens=%s completion_tokens=%s total_tokens=%s",
+            elapsed_ms,
+            token_usage.get("prompt_tokens"),
+            token_usage.get("completion_tokens"),
+            token_usage.get("total_tokens"),
+        )
+
+        return response_data
+
     except Exception:
+        elapsed_ms = (time.perf_counter() - started_at) * 1000
+
+        logger.exception(
+            "ask_request_failed latency_ms=%.2f",
+            elapsed_ms,
+        )
+
         raise HTTPException(
             status_code=502,
             detail="Unable to process the RAG request"

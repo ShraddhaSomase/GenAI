@@ -148,3 +148,58 @@ Hybrid search (semantic + keyword, reciprocal rank fusion) over PMMY and Stand-U
 | `checkpoint-1` | Day 1–5 records + search |
 | `checkpoint-2` | Loan picker, agent UI, citations, feedback |
 | `week-1` | Week 1 summary |
+
+---
+
+## Day 13 — Production Readiness
+
+### Production features
+
+- **Prompt-injection protection:** User questions and retrieved document content are treated as untrusted data. Instructions inside them cannot override the assistant's system rules.
+- **Response caching:** Successful RAG answers are cached in memory to reduce repeated LLM calls.
+- **Cache configuration:** Maximum 128 entries with a 5-minute expiration.
+- **Request monitoring:** `/ask` logs request latency in milliseconds.
+- **Token monitoring:** Logs prompt, completion, and total token usage when returned by the LLM provider.
+- **Input validation:** Questions are limited to 2,000 characters.
+- **Error handling:** Failed RAG requests return a controlled HTTP 502 response.
+
+### Architecture
+
+```mermaid
+flowchart TD
+    A[User Question] --> B[FastAPI /ask]
+    B --> C[Input Validation]
+    C --> D{Cache Hit?}
+    D -->|Yes| E[Return Cached Answer]
+    D -->|No| F[Hybrid Search]
+    F --> G[Document Retrieval]
+    G --> H[Groq LLM]
+    H --> I[Validate JSON and Citations]
+    I --> J[Cache Successful Answer]
+    J --> K[Return Answer and Sources]
+    E --> K
+    K --> L[Log Latency and Token Usage]
+```
+
+### Evaluation results
+
+The existing RAG evaluation produced these results:
+
+| Metric | top_k=3 | top_k=5 |
+|---|---:|---:|
+| Answerability accuracy | 93.33% | 100.00% |
+| Citation coverage | 91.67% | 100.00% |
+| Source accuracy | 91.67% | 100.00% |
+| Keyword accuracy | 40.25% | 63.83% |
+| **Overall score** | **82.05%** | **92.77%** |
+
+### Automated testing
+
+- Total automated tests: **50**
+- Passing tests: **50**
+- RAG endpoint, records, search, agent tools, caching, input validation, and prompt-injection safeguards are covered.
+
+### Performance measurement
+
+Request latency and token usage are logged by the API. Actual latency benchmarks and provider token measurements should be collected from real requests before publishing performance figures. Cache hits do not make a new LLM request.
+
