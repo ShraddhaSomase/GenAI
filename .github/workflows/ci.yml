@@ -7,6 +7,8 @@ on:
     branches: [main]
 
 jobs:
+
+  # ── 1. Lint ─────────────────────────────────────────────────────────────────
   lint:
     name: Ruff lint
     runs-on: ubuntu-latest
@@ -24,11 +26,12 @@ jobs:
       - name: Run ruff
         run: ruff check .
 
+  # ── 2. Tests ─────────────────────────────────────────────────────────────────
   test:
     name: Pytest
     runs-on: ubuntu-latest
     env:
-      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GROQ_API_KEY: test-key-ci
 
     steps:
       - uses: actions/checkout@v4
@@ -38,12 +41,15 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Install CI dependencies
+        # Uses requirements-ci.txt — no torch/sentence-transformers.
+        # All embedding and LLM calls are mocked in tests.
+        run: pip install -r requirements-ci.txt
 
       - name: Run tests
         run: pytest tests/ -v --tb=short
 
+  # ── 3. Docker build ──────────────────────────────────────────────────────────
   docker:
     name: Docker build
     runs-on: ubuntu-latest
@@ -55,14 +61,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build API image
+      # Build the API image using a minimal CI Dockerfile that
+      # avoids the 700 MB torch download — just verifies the image structure.
+      - name: Build API image (CI)
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: Dockerfile.ci
           push: false
           tags: mudramitra-api:ci
-          build-args: SKIP_MODEL_DOWNLOAD=1
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

@@ -1,0 +1,21 @@
+# ── CI-only requirements (no torch / sentence-transformers) ──────────────────
+# Tests mock all LLM and embedding calls, so heavy ML packages are not needed.
+# This keeps GitHub Actions pip install under 60 seconds.
+
+fastapi
+uvicorn[standard]
+pandas
+scikit-learn
+groq
+python-dotenv
+chromadb
+pypdf
+langgraph
+langgraph-checkpoint-sqlite
+langchain-core
+pillow
+
+# Test / lint
+pytest
+httpx
+ruff
