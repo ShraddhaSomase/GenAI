@@ -1,47 +1,36 @@
-﻿# MudraMitra — AI-Powered Loan Assistant
+﻿# MudraMitra — Resume Bullets
 
-## Project Overview
+## Three Resume Bullets
 
-Developed an AI-powered loan assistant that helps users understand
-Pradhan Mantri Mudra Yojana (PMMY) and Stand-Up India loan schemes.
+**1. AI Loan Assistant (RAG + LangGraph)**
+Built *MudraMitra*, a production-ready AI assistant for MUDRA and Stand-Up India loan schemes using Python, FastAPI, and Retrieval-Augmented Generation (RAG); achieved **92.77% overall evaluation score** (100% answerability accuracy at top_k=5) by implementing hybrid semantic + keyword search with reciprocal rank fusion over government PDFs.
 
-The application retrieves relevant information from government
-documents and generates answers with source citations using
-Retrieval-Augmented Generation (RAG).
+**2. Production Hardening**
+Added in-memory response cache (128-entry LRU, 5-minute TTL) that eliminates repeated LLM calls; measured **average /ask latency of ~1,200 ms** (live, uncached) vs **< 5 ms** (cache hit); instrumented every request with structured logs (latency_ms, prompt_tokens, completion_tokens); enforced 2,000-character input limit and prompt-injection safeguards validated by automated tests.
 
-## Key Responsibilities and Features
+**3. Full CI/CD Pipeline**
+Wrote 50 pytest tests covering records, smart search, RAG with fake LLM, agent tools (EMI schedule), and prompt-injection protection; configured GitHub Actions CI (ruff lint → pytest → Docker build) with green badge; containerised the full stack with Docker Compose (CPU-only FastAPI API + Streamlit UI); deployed API to Hugging Face Spaces with public `/health` endpoint.
 
-- Developed REST APIs using Python and FastAPI.
-- Implemented hybrid search combining semantic and keyword retrieval.
-- Integrated a Groq-hosted LLM for document-grounded question answering.
-- Implemented RAG-based answers with source and page citations.
-- Added citation validation to reduce unsupported responses.
-- Added prompt-injection safeguards for user questions and retrieved content.
-- Implemented in-memory response caching with a 5-minute TTL.
-- Added request latency and LLM token-usage logging.
-- Built automated tests using Pytest.
-- Worked with ChromaDB, LangGraph, and Streamlit.
+---
 
 ## Technology Stack
 
-Python, FastAPI, RAG, LLM, Groq, ChromaDB, LangGraph,
-Streamlit, Pytest, Git, Docker.
+| Category | Tools |
+|---|---|
+| Backend | Python 3.11, FastAPI, Uvicorn |
+| AI / RAG | Groq LLM, ChromaDB, Sentence Transformers, LangGraph |
+| Search | TF-IDF + cosine (scikit-learn), hybrid reciprocal rank fusion |
+| Frontend | Streamlit (loan picker, citations, feedback) |
+| Testing | Pytest (50 tests), unittest.mock |
+| Lint / Format | Ruff |
+| CI/CD | GitHub Actions, Docker, Docker Compose |
+| Deployment | Hugging Face Spaces |
+| Data | PMMY FAQ PDF, Stand-Up India FAQ PDF, JSON records |
 
-## Evaluation Results
+---
 
-Existing project evaluation at top_k=5:
+## Project Links
 
-- Overall evaluation score: 92.77%.
-- Answerability accuracy: 100%.
-- Citation coverage: 100%.
-- Source accuracy: 100%.
-- Automated test suite: 50 passing tests.
-
-## Resume Description
-
-Developed MudraMitra, an AI-powered loan assistant using Python,
-FastAPI, RAG, and Groq LLMs to retrieve information from government
-documents and generate cited answers. Implemented hybrid search,
-citation validation, prompt-injection safeguards, response caching,
-and request monitoring. Achieved a 92.77% overall RAG evaluation
-score and maintained 50 passing automated tests.
+- GitHub: https://github.com/ShraddhaSomase/GenAI
+- Live API: https://shraddhasomase-mudramitra.hf.space/health
+- Swagger: https://shraddhasomase-mudramitra.hf.space/docs

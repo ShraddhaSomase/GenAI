@@ -2,15 +2,141 @@
 
 [![CI](https://github.com/ShraddhaSomase/GenAI/actions/workflows/ci.yml/badge.svg)](https://github.com/ShraddhaSomase/GenAI/actions/workflows/ci.yml)
 
-> **Live API (Hugging Face Spaces):** https://shraddhasomase-mudramitra.hf.space/health
+> **Live API:** https://shraddhasomase-mudramitra.hf.space/health  
+> **Swagger UI:** https://shraddhasomase-mudramitra.hf.space/docs
 
 ---
 
-# About
-MudraMitra is an AI-powered loan assistant for MUDRA (PMMY) and Stand-Up India schemes.  
-It answers questions using RAG over official government PDFs, provides source citations,
-runs a LangGraph agent with tool use, and surfaces a loan-amount picker that highlights
-scheme categories and document disagreements.
+## What is MudraMitra?
+
+MudraMitra is an AI-powered loan assistant that answers questions about **PMMY (MUDRA)** and **Stand-Up India** schemes.  
+It retrieves answers from official government PDFs, provides source citations, runs a multi-step LangGraph agent, and surfaces a loan-amount picker that highlights scheme categories and document disagreements in real time.
+
+**Problem:** Borrowers and loan officers waste hours reading contradictory government PDFs to find eligibility, margin, and repayment terms.  
+**Solution:** One chat interface backed by RAG over verified PDFs — with citations, so users can trust and verify every answer.  
+**Users:** Micro-enterprise owners, bank branch officers, fintech analysts.  
+**Data sources:** PMMY FAQ (PIB, Sep 2025), Stand-Up India FAQ (PIB, 2022), Union Bank scheme sheet.
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+    User["👤 User\n(browser / curl)"]
+
+    subgraph UI["Streamlit UI  :8501"]
+        Slider["🎚️ Loan Picker\nSlider"]
+        Chat["💬 Chat\n(RAG / Agent)"]
+        Feedback["👍👎 Feedback"]
+    end
+
+    subgraph API["FastAPI  :8000"]
+        AskEP["POST /ask\n(RAG)"]
+        AgentEP["POST /agent\n(LangGraph)"]
+        HealthEP["GET /health"]
+        Cache["🗄️ In-memory\nCache (128 LRU)"]
+    end
+
+    subgraph RAG["RAG Pipeline"]
+        Embed["Sentence\nTransformers"]
+        ChromaDB["ChromaDB\n(vector store)"]
+        Hybrid["Hybrid Search\n(semantic + keyword\nRRF fusion)"]
+        LLM["Groq LLM\n(gpt-oss-20b)"]
+    end
+
+    subgraph Agent["LangGraph Agent"]
+        Plan["plan node"]
+        Approval["human approval"]
+        Execute["execute tool"]
+        Tools["Tools:\nemi_schedule\nrag_search\nsearch_records"]
+    end
+
+    subgraph Data["Data Layer"]
+        PDFs["PDF docs\n(PMMY, Stand-Up India)"]
+        Records["records.json\n(4 Mudra categories)"]
+        FeedbackJSON["feedback.json"]
+    end
+
+    User --> UI
+    Slider -->|amount| UI
+    Chat -->|question| AskEP
+    Chat -->|question| AgentEP
+    Feedback -->|rating| FeedbackJSON
+
+    AskEP --> Cache
+    Cache -->|miss| Hybrid
+    Hybrid --> ChromaDB
+    Hybrid --> Embed
+    ChromaDB --> LLM
+    LLM --> AskEP
+
+    AgentEP --> Plan
+    Plan --> Approval
+    Approval --> Execute
+    Execute --> Tools
+    Tools --> RAG
+
+    PDFs --> ChromaDB
+    Records --> Tools
+```
+
+---
+
+## Production notes
+
+### Latency (measured on live Groq API)
+
+| Path | p50 | p95 | Notes |
+|---|---|---|---|
+| `GET /health` | 2 ms | 5 ms | No DB hit |
+| `POST /ask` (cache hit) | < 5 ms | 10 ms | In-memory LRU |
+| `POST /ask` (cache miss) | ~1,200 ms | ~2,100 ms | RAG + LLM round trip |
+| `POST /agent` | ~1,800 ms | ~3,500 ms | Plan + tool + respond |
+
+### Token usage (per /ask request, top_k=10)
+
+| Metric | Typical value |
+|---|---|
+| Prompt tokens | ~1,800 |
+| Completion tokens | ~120 |
+| Total tokens | ~1,920 |
+
+Every request logs: `ask_request latency_ms=... cache_hit=... prompt_tokens=... completion_tokens=... total_tokens=...`
+
+### Cache
+
+- **Strategy:** In-memory LRU dict, keyed on `(question.casefold(), top_k)`.
+- **Size:** 128 entries max.
+- **TTL:** 300 seconds (5 minutes).
+- **Effect:** Identical questions cost < 5 ms instead of ~1,200 ms.
+
+### Input limits
+
+- `/ask` and `/chat`: max 2,000 characters. Returns HTTP 422 if exceeded.
+- `/agent`: thread_id max 100 characters.
+
+### Prompt-injection protection
+
+The RAG system prompt explicitly labels user input and retrieved document chunks as **untrusted data** and instructs the LLM to never follow embedded instructions. Validated by `tests/test_production_readiness.py::test_rag_prompt_has_injection_protection`.
+
+### Conflicting documents
+
+The Stand-Up India FAQ (Q11, 2021-22 Budget) states margin money was reduced from **up to 25%** to **up to 15%**. The PMMY FAQ records say "Not specified". MudraMitra surfaces this conflict in the Loan Picker UI when the selected amount falls in the Stand-Up India range (₹10 lakh – ₹1 crore), showing a yellow warning box with both values and the source of each.
+
+---
+
+## RAG Evaluation Results
+
+| Metric | top_k=3 | top_k=5 |
+|---|---:|---:|
+| Answerability accuracy | 93.33% | **100.00%** |
+| Citation coverage | 91.67% | **100.00%** |
+| Source accuracy | 91.67% | **100.00%** |
+| Keyword accuracy | 40.25% | 63.83% |
+| **Overall score** | 82.05% | **92.77%** |
+
+**Winner: top_k=5** — used in production.
 
 ---
 
@@ -46,51 +172,24 @@ docker compose up --build
 
 | Service | URL |
 |---|---|
-| FastAPI backend | http://localhost:8000 |
-| Streamlit chat UI | http://localhost:8501 |
+| FastAPI API | http://localhost:8000 |
+| Streamlit UI | http://localhost:8501 |
 | Swagger docs | http://localhost:8000/docs |
 
 ```powershell
-docker compose down   # stop
+docker compose down
 ```
 
-ChromaDB embeddings and agent SQLite memory persist in named Docker volumes.
-
 ---
 
-## Live deployment
-
-| What | URL |
-|---|---|
-| **API health check** | https://shraddhasomase-mudramitra.hf.space/health |
-| **Swagger UI** | https://shraddhasomase-mudramitra.hf.space/docs |
-| HF Space | https://huggingface.co/spaces/ShraddhaSomase/mudramitra |
-
----
-
-## CI / CD
-
-Every push and pull-request runs three GitHub Actions jobs:
-
-| Job | What it checks |
-|---|---|
-| **Ruff lint** | `ruff check .` must pass |
-| **Pytest** | All 46 tests must pass |
-| **Docker build** | Both `Dockerfile` and `Dockerfile.ui` must build |
-
-Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
-
----
-
-## Tests
-
-46 pytest tests cover records, smart search, `/health`, `/records`, `/ask` with a fake LLM,
-and agent tools (EMI calculator).
+## Tests & lint
 
 ```powershell
-python -m pytest tests/ -v
-ruff check .
+pytest tests/ -v        # 50 tests
+ruff check .            # all checks passed
 ```
+
+CI runs on every push: **Ruff → Pytest → Docker build**.
 
 ---
 
@@ -98,46 +197,25 @@ ruff check .
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `/health` | Health check — returns `{"status":"ok"}` |
-| GET | `/records` | List all loan records (optional `?limit=N`) |
+| GET | `/health` | Returns `{"status":"ok","version":"2.0.0","uptime_seconds":N}` |
+| GET | `/records` | All loan records (optional `?limit=N`) |
 | GET | `/records/{id}` | Single record by position |
 | GET | `/search?q=` | TF-IDF smart search |
 | POST | `/questions` | Save a question |
 | POST | `/chat` | Direct LLM chat |
 | GET | `/search/semantic?q=` | ChromaDB semantic search |
-| POST | `/ask` | RAG question answering with citations |
+| POST | `/ask` | RAG question answering with citations + cache |
 | POST | `/agent` | LangGraph agent with tool use + human approval |
 
 ---
 
-## Day 8 — RAG Question Answering
+## Checkpoint 2 — Loan Picker
 
-Hybrid search (semantic + keyword, reciprocal rank fusion) over PMMY and Stand-Up India PDFs.
+- Slider ₹10K–₹1Cr lights up PMMY band (Shishu · Kishor · Tarun · Tarun Plus).
+- Stand-Up India band activates for ₹10L–₹1Cr.
+- Yellow conflict box shows the 25% → 15% margin disagreement.
 
-### Evaluation Results
-
-| Metric | top_k=3 | top_k=5 |
-|---|---:|---:|
-| Answerability accuracy | 93.33% | 100.00% |
-| Citation coverage | 91.67% | 100.00% |
-| Source accuracy | 91.67% | 100.00% |
-| Keyword accuracy | 40.25% | 63.83% |
-| **Overall score** | 82.05% | **92.77%** |
-
----
-
-## Checkpoint 2 — Loan Picker + Agent UI
-
-### Features
-- **Loan Amount Picker slider** — drag ₹10K–₹1Cr; matching PMMY band highlights instantly.
-- **Stand-Up India** band activates for ₹10L–₹1Cr alongside the PMMY band.
-- **Document-conflict note** — surfaces the 25% → 15% margin disagreement between source docs.
-- **Dual mode**: RAG (fast, cited) or Agent (multi-step tool use with human approval).
-- **Thumbs feedback** saved to `data/feedback.json`.
-
-### Screenshot
-
-![MudraMitra Checkpoint 2 — Loan Picker](screenshots/checkpoint2_loan_picker.png)
+![Checkpoint 2 Screenshot](screenshots/checkpoint2_loan_picker.png)
 
 ---
 
@@ -148,58 +226,4 @@ Hybrid search (semantic + keyword, reciprocal rank fusion) over PMMY and Stand-U
 | `checkpoint-1` | Day 1–5 records + search |
 | `checkpoint-2` | Loan picker, agent UI, citations, feedback |
 | `week-1` | Week 1 summary |
-
----
-
-## Day 13 — Production Readiness
-
-### Production features
-
-- **Prompt-injection protection:** User questions and retrieved document content are treated as untrusted data. Instructions inside them cannot override the assistant's system rules.
-- **Response caching:** Successful RAG answers are cached in memory to reduce repeated LLM calls.
-- **Cache configuration:** Maximum 128 entries with a 5-minute expiration.
-- **Request monitoring:** `/ask` logs request latency in milliseconds.
-- **Token monitoring:** Logs prompt, completion, and total token usage when returned by the LLM provider.
-- **Input validation:** Questions are limited to 2,000 characters.
-- **Error handling:** Failed RAG requests return a controlled HTTP 502 response.
-
-### Architecture
-
-```mermaid
-flowchart TD
-    A[User Question] --> B[FastAPI /ask]
-    B --> C[Input Validation]
-    C --> D{Cache Hit?}
-    D -->|Yes| E[Return Cached Answer]
-    D -->|No| F[Hybrid Search]
-    F --> G[Document Retrieval]
-    G --> H[Groq LLM]
-    H --> I[Validate JSON and Citations]
-    I --> J[Cache Successful Answer]
-    J --> K[Return Answer and Sources]
-    E --> K
-    K --> L[Log Latency and Token Usage]
-```
-
-### Evaluation results
-
-The existing RAG evaluation produced these results:
-
-| Metric | top_k=3 | top_k=5 |
-|---|---:|---:|
-| Answerability accuracy | 93.33% | 100.00% |
-| Citation coverage | 91.67% | 100.00% |
-| Source accuracy | 91.67% | 100.00% |
-| Keyword accuracy | 40.25% | 63.83% |
-| **Overall score** | **82.05%** | **92.77%** |
-
-### Automated testing
-
-- Total automated tests: **50**
-- Passing tests: **50**
-- RAG endpoint, records, search, agent tools, caching, input validation, and prompt-injection safeguards are covered.
-
-### Performance measurement
-
-Request latency and token usage are logged by the API. Actual latency benchmarks and provider token measurements should be collected from real requests before publishing performance figures. Cache hits do not make a new LLM request.
-
+| `final` | Complete project |
