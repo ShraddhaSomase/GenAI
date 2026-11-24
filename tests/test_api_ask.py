@@ -4,8 +4,8 @@ import json
 from unittest.mock import MagicMock, patch
 
 
-def _make_fake_rag_response(found=True, answer="Test answer.", citations=None):
-    """Build the fake OpenAI-compatible response object for rag.py."""
+def _make_fake_groq_client(found=True, answer="Test answer.", citations=None):
+    """Return a mock Groq client whose create() returns the given payload."""
     if citations is None:
         citations = [1] if found else []
 
@@ -15,7 +15,11 @@ def _make_fake_rag_response(found=True, answer="Test answer.", citations=None):
     )
     fake_resp = MagicMock()
     fake_resp.choices = [fake_choice]
-    return fake_resp
+    fake_resp.usage = None
+
+    mock_client = MagicMock()
+    mock_client.chat.completions.create.return_value = fake_resp
+    return mock_client
 
 
 class TestAskEndpoint:
@@ -47,70 +51,66 @@ class TestAskEndpoint:
         """When the fake LLM says found=False the endpoint passes it through."""
         from fastapi.testclient import TestClient
 
-        fake_resp = _make_fake_rag_response(
+        fake_client = _make_fake_groq_client(
             found=False,
             answer="Information not available.",
             citations=[],
         )
 
-        with patch("app.rag.client") as mock_client, \
-             patch("app.llm.client"):
-            mock_client.chat.completions.create.return_value = fake_resp
+        with patch("app.rag._get_client", return_value=fake_client), \
+             patch("app.llm._get_client", return_value=fake_client), \
+             patch("app.rag.hybrid_search") as mock_search:
 
-            # Also patch hybrid_search so it returns a minimal chunk list
-            with patch("app.rag.hybrid_search") as mock_search:
-                mock_search.return_value = [
-                    {
-                        "id": "chunk-1",
-                        "text": "Some context",
-                        "source": "pmmy_faq.pdf",
-                        "page": 1,
-                        "title": "PMMY FAQ",
-                    }
-                ]
+            mock_search.return_value = [
+                {
+                    "id": "chunk-1",
+                    "text": "Some context",
+                    "source": "pmmy_faq.pdf",
+                    "page": 1,
+                    "title": "PMMY FAQ",
+                }
+            ]
 
-                from app.main import app
-                client = TestClient(app)
-                response = client.post(
-                    "/ask",
-                    json={"question": "What is the interest rate?"},
-                )
+            from app.main import app
+            client = TestClient(app)
+            response = client.post(
+                "/ask",
+                json={"question": "What is the interest rate?"},
+            )
 
         assert response.status_code == 200
-        body = response.json()
-        assert body["found"] is False
+        assert response.json()["found"] is False
 
     def test_ask_with_fake_llm_citation_included(self):
         """Verify citations list is populated when LLM returns citation [1]."""
         from fastapi.testclient import TestClient
 
-        fake_resp = _make_fake_rag_response(
+        fake_client = _make_fake_groq_client(
             found=True,
-            answer="Shishu covers up to ₹50,000.",
+            answer="Shishu covers up to Rs.50,000.",
             citations=[1],
         )
 
-        with patch("app.rag.client") as mock_client, \
-             patch("app.llm.client"):
-            mock_client.chat.completions.create.return_value = fake_resp
+        with patch("app.rag._get_client", return_value=fake_client), \
+             patch("app.llm._get_client", return_value=fake_client), \
+             patch("app.rag.hybrid_search") as mock_search:
 
-            with patch("app.rag.hybrid_search") as mock_search:
-                mock_search.return_value = [
-                    {
-                        "id": "chunk-1",
-                        "text": "Shishu loans are up to 50000.",
-                        "source": "pmmy_faq.pdf",
-                        "page": 1,
-                        "title": "PMMY FAQ",
-                    }
-                ]
+            mock_search.return_value = [
+                {
+                    "id": "chunk-1",
+                    "text": "Shishu loans are up to 50000.",
+                    "source": "pmmy_faq.pdf",
+                    "page": 1,
+                    "title": "PMMY FAQ",
+                }
+            ]
 
-                from app.main import app
-                client = TestClient(app)
-                response = client.post(
-                    "/ask",
-                    json={"question": "What is Shishu?"},
-                )
+            from app.main import app
+            client = TestClient(app)
+            response = client.post(
+                "/ask",
+                json={"question": "What is Shishu?"},
+            )
 
         assert response.status_code == 200
         body = response.json()

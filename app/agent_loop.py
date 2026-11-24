@@ -3,7 +3,7 @@
 import json
 import re
 
-from app.llm import client
+from app.llm import _get_client
 from app.tools import execute_tool
 
 MODEL_NAME = "qwen/qwen3.8-27b"
@@ -90,7 +90,7 @@ def run_agent(question):
 
     for step in range(1, MAX_ITERATIONS + 1):
 
-        response = client.chat.completions.create(
+        response = _get_client().chat.completions.create(
             model=MODEL_NAME,
             messages=messages,
             temperature=0,

@@ -1,4 +1,4 @@
-﻿import json
+import json
 import sqlite3
 from pathlib import Path
 from typing import Annotated, Any, TypedDict
@@ -10,7 +10,7 @@ from langgraph.graph.message import add_messages
 from langgraph.types import interrupt
 
 from app.agent_loop import MODEL_NAME
-from app.llm import client
+from app.llm import _get_client
 from app.tools import TOOLS, execute_tool
 
 # SQLite database for persistent conversation memory
@@ -92,7 +92,7 @@ For a direct answer:
 }
 """
 
-    response = client.chat.completions.create(
+    response = _get_client().chat.completions.create(
         model=MODEL_NAME,
         messages=[
             {"role": "system", "content": system_prompt},
@@ -194,7 +194,7 @@ def response_node(state: AgentState):
         default=str
     )
 
-    response = client.chat.completions.create(
+    response = _get_client().chat.completions.create(
         model=MODEL_NAME,
         messages=[
             {

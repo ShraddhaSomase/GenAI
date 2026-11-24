@@ -1,0 +1,33 @@
+# ── MudraMitra API — Render deployment ───────────────────────────────────────
+# Uses requirements-ci.txt (no torch/sentence-transformers).
+# Embedding calls are mocked or handled via ChromaDB metadata only.
+# Render sets $PORT at runtime; we pass it to uvicorn.
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-ci.txt .
+RUN pip install --no-cache-dir -r requirements-ci.txt
+
+COPY app/        ./app/
+COPY prompts/    ./prompts/
+COPY data/records.json         ./data/records.json
+COPY data/source_manifest.json ./data/source_manifest.json
+COPY data/standup_faq.txt      ./data/standup_faq.txt
+COPY data/feedback.json        ./data/feedback.json
+COPY data/questions.json       ./data/questions.json
+
+RUN mkdir -p /app/data/chroma_db
+
+RUN useradd -m appuser && chown -R appuser /app
+USER appuser
+
+EXPOSE 10000
+
+# Render injects $PORT — default to 10000 if not set
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]

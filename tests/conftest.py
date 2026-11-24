@@ -46,28 +46,32 @@ def sample_records():
 # FastAPI test client
 # ---------------------------------------------------------------------------
 
-@pytest.fixture
-def api_client():
-    """Return a TestClient for the FastAPI app with LLM calls patched."""
-    from fastapi.testclient import TestClient
-
-    # Patch the LLM client used by rag.py so no real API calls are made
+def _make_fake_client():
+    """Return a mock Groq client whose .chat.completions.create() works."""
     fake_choice = MagicMock()
     fake_choice.message.content = json.dumps({
         "found": True,
         "answer": "MUDRA loans have three categories: Shishu, Kishor, and Tarun.",
         "citations": [1],
     })
-
     fake_response = MagicMock()
     fake_response.choices = [fake_choice]
+    fake_response.usage = None
 
-    with patch("app.rag.client") as mock_rag_client, \
-         patch("app.llm.client") as mock_llm_client:
+    mock_client = MagicMock()
+    mock_client.chat.completions.create.return_value = fake_response
+    return mock_client
 
-        mock_rag_client.chat.completions.create.return_value = fake_response
-        mock_llm_client.chat.completions.create.return_value = fake_response
 
+@pytest.fixture
+def api_client():
+    """Return a TestClient for the FastAPI app with LLM calls patched."""
+    from fastapi.testclient import TestClient
+
+    fake = _make_fake_client()
+
+    # Patch _get_client in both rag and llm modules so no real API calls happen
+    with patch("app.rag._get_client", return_value=fake), \
+         patch("app.llm._get_client", return_value=fake):
         from app.main import app
-        client = TestClient(app)
-        yield client
+        yield TestClient(app)

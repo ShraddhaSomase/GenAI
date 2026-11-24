@@ -3,7 +3,7 @@
 import json
 import re
 
-from app.llm import client
+from app.llm import _get_client
 from app.vectorstore import hybrid_search
 
 MODEL_NAME = "openai/gpt-oss-20b"
@@ -116,7 +116,7 @@ USER QUESTION:
 Answer using only the document context.
 """
 
-    response = client.chat.completions.create(
+    response = _get_client().chat.completions.create(
         model=MODEL_NAME,
         messages=[
             {"role": "system", "content": system_prompt},

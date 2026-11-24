@@ -2,8 +2,8 @@
 
 [![CI](https://github.com/ShraddhaSomase/GenAI/actions/workflows/ci.yml/badge.svg)](https://github.com/ShraddhaSomase/GenAI/actions/workflows/ci.yml)
 
-> **Live API:** https://shraddhasomase-mudramitra.hf.space/health  
-> **Swagger UI:** https://shraddhasomase-mudramitra.hf.space/docs
+> **Live API (Render):** https://mudramitra-api.onrender.com/health  
+> **Swagger UI:** https://mudramitra-api.onrender.com/docs
 
 ---
 
