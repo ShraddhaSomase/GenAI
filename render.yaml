@@ -1,4 +1,6 @@
 services:
+
+  # ── FastAPI backend ──────────────────────────────────────────────────────────
   - type: web
     name: mudramitra-api
     runtime: docker
@@ -11,4 +13,19 @@ services:
       - key: PORT
         value: "10000"
     healthCheckPath: /health
+    autoDeploy: true
+
+  # ── Streamlit UI ─────────────────────────────────────────────────────────────
+  - type: web
+    name: mudramitra-ui
+    runtime: docker
+    dockerfilePath: ./Dockerfile.ui.render
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: API_BASE
+        value: "https://mudramitra-api.onrender.com"
+      - key: PORT
+        value: "8501"
+    healthCheckPath: /_stcore/health
     autoDeploy: true
