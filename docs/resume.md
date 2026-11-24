@@ -1,4 +1,4 @@
-﻿# MudraMitra — Resume Bullets
+# MudraMitra � Resume Bullets
 
 ## Three Resume Bullets
 
@@ -9,7 +9,7 @@ Built *MudraMitra*, a production-ready AI assistant for MUDRA and Stand-Up India
 Added in-memory response cache (128-entry LRU, 5-minute TTL) that eliminates repeated LLM calls; measured **average /ask latency of ~1,200 ms** (live, uncached) vs **< 5 ms** (cache hit); instrumented every request with structured logs (latency_ms, prompt_tokens, completion_tokens); enforced 2,000-character input limit and prompt-injection safeguards validated by automated tests.
 
 **3. Full CI/CD Pipeline**
-Wrote 50 pytest tests covering records, smart search, RAG with fake LLM, agent tools (EMI schedule), and prompt-injection protection; configured GitHub Actions CI (ruff lint → pytest → Docker build) with green badge; containerised the full stack with Docker Compose (CPU-only FastAPI API + Streamlit UI); deployed API to Hugging Face Spaces with public `/health` endpoint.
+Wrote 50 pytest tests covering records, smart search, RAG with fake LLM, agent tools (EMI schedule), and prompt-injection protection; configured GitHub Actions CI (ruff lint ? pytest ? Docker build) with green badge; containerised the full stack with Docker Compose (CPU-only FastAPI API + Streamlit UI); deployed API to Hugging Face Spaces with public `/health` endpoint.
 
 ---
 
@@ -32,5 +32,5 @@ Wrote 50 pytest tests covering records, smart search, RAG with fake LLM, agent t
 ## Project Links
 
 - GitHub: https://github.com/ShraddhaSomase/GenAI
-- Live API: https://shraddhasomase-mudramitra.hf.space/health
-- Swagger: https://shraddhasomase-mudramitra.hf.space/docs
+- Live API: https://mudramitra-api.onrender.com/health
+- Swagger: https://mudramitra-api.onrender.com/docs
