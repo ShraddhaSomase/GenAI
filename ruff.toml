@@ -1,16 +1,8 @@
-# Ruff configuration for MudraMitra
 target-version = "py311"
 
 [lint]
-# Rules we explicitly ignore across the whole project:
-#   BLE001 — broad Exception catches are intentional in API boundary handlers
-#   TRY004 — ValueError is used consistently for argument validation
-#   SIM102 — nested-if style is clearer in some rag/tools contexts
-#   SIM117 — nested with statements are acceptable for readability
-#   ISC004 — implicit string concatenation inside tuples (ingest.py regex patterns)
 ignore = ["BLE001", "TRY004", "SIM102", "SIM117", "ISC004"]
 
-# Exclude generated / backup / legacy files
 exclude = [
     ".venv",
     "__pycache__",

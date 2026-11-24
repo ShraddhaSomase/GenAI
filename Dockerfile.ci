@@ -1,8 +1,3 @@
-# ── MudraMitra API — CI build ─────────────────────────────────────────────────
-# Fast image used only by GitHub Actions to verify the Docker build works.
-# Uses requirements-ci.txt (no torch / sentence-transformers).
-# The production Dockerfile installs the full stack including CPU torch.
-
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -18,8 +13,6 @@ COPY app/        ./app/
 COPY prompts/    ./prompts/
 COPY data/records.json         ./data/records.json
 COPY data/source_manifest.json ./data/source_manifest.json
-COPY data/standup_faq.txt      ./data/standup_faq.txt
-COPY data/feedback.json        ./data/feedback.json
 COPY data/questions.json       ./data/questions.json
 
 RUN mkdir -p /app/data/chroma_db

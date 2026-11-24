@@ -1,0 +1,32 @@
+[
+    {
+        "question": "\"What are the different categories available under PMMY?\"\n    top_k = 4",
+        "answer": "The categories under PMMY are Shishu, Kishor, Tarun, and Tarun Plus.",
+        "rating": "👍 Helpful",
+        "timestamp": "2026-11-17T13:35:14.573650+00:00"
+    },
+    {
+        "question": "What are the different categories available under PMMY?",
+        "answer": "The categories under PMMY are Shishu, Kishor, Tarun, and Tarun Plus.",
+        "rating": "helpful",
+        "timestamp": "2026-11-17T13:48:32.196823+00:00"
+    },
+    {
+        "question": "What are the different categories available under PMMY?",
+        "answer": "The categories under PMMY are Shishu, Kishor, Tarun, and Tarun Plus.",
+        "rating": "helpful",
+        "timestamp": "2026-11-17T13:49:22.623239+00:00"
+    },
+    {
+        "question": "What are the eligibility criteria for a MUDRA loan?",
+        "answer": "To be eligible for a MUDRA loan, you must be an Indian citizen who has a business plan for a non‑farm income‑generating activity such as manufacturing, processing, trading or services, and your credit need should be up to ₹20 lakh. You can apply through a bank, micro‑finance institution (MFI) or non‑banking finance company (NBFC).",
+        "rating": "helpful",
+        "timestamp": "2026-11-18T11:05:32.526734+00:00"
+    },
+    {
+        "question": "what are the type of loans ",
+        "answer": "The MUDRA loan scheme offers four types of loans: Shishu (up to Rs. 50,000), Kishor (Rs. 50,000 to Rs. 5 lakh), Tarun (Rs. 5 lakh to Rs. 10 lakh), and Tarun Plus (Rs. 10 lakh to Rs. 20 lakh).",
+        "rating": "helpful",
+        "timestamp": "2026-11-23T13:49:48.698575+00:00"
+    }
+]
